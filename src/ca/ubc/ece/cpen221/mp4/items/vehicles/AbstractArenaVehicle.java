@@ -1,10 +1,10 @@
-package ca.ubc.ece.cpen221.mp4.Viruses;
+package ca.ubc.ece.cpen221.mp4.items.vehicles;
 
 import javax.swing.ImageIcon;
 
 import ca.ubc.ece.cpen221.mp4.Location;
 
-public class AbstractArenaVirus implements ArenaVirus{
+public abstract class AbstractArenaVehicle implements ArenaVehicle{
 
     @Override
     public void moveTo(Location targetLocation) {
