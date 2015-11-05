@@ -25,7 +25,6 @@ import ca.ubc.ece.cpen221.mp4.staff.WorldUI;
  * Your Fox AI.
  */
 public class FoxAI extends AbstractAI {
-	private int closest = 2; // max number; greater than fox's view range
 
 	public FoxAI() {
 
@@ -41,59 +40,48 @@ public class FoxAI extends AbstractAI {
 		final int STRENGTH = animal.getStrength();
 		final int MAX_ENERGY = animal.getMaxEnergy();
 		final int VIEW_RANGE = animal.getViewRange();
+		final int BREEDING_ENERGY = MAX_ENERGY - 20;
 
-		int count = 1;
-
-		int xCoord = CURRENT_LOCATION.getX();
-		int yCoord = CURRENT_LOCATION.getY();
+		int proximity;
 
 		Set<Item> surroundingItems = new TreeSet<Item>();
 		surroundingItems = world.searchSurroundings(animal);
 
-		// if there is nothing around, either breed or move
-		if (surroundingItems.isEmpty()) {
-
-			// breed if energy is greater than or equal to 100 (starting energy)
-			if (ENERGY >= 60) {
-				return new BreedCommand(animal, Util.getRandomEmptyAdjacentLocation((World) world, CURRENT_LOCATION));
-			} else {
-				moveFromEdge(xCoord, yCoord, world, animal, CURRENT_LOCATION);
-			}
-		}
-
-		else {
-			while (count <= VIEW_RANGE) {
-				if (count > 3 && ENERGY > 70) {
-					return new BreedCommand(animal,
-							Util.getRandomEmptyAdjacentLocation((World) world, CURRENT_LOCATION));
-
-				}
-
-				for (Item currentItem : world.searchSurroundings(animal)) {
-					if (currentItem.getLocation().getDistance(CURRENT_LOCATION) == count) {
-						// if item is a rabbit,
-						if (currentItem.getName().equals("Rabbit")) {
-							if (count == 1) {
-								if (currentItem.getStrength() < STRENGTH) {
-									return new EatCommand(animal, currentItem);
-								}
-							} else {
-								Direction toRabbit = Util.getDirectionTowards(CURRENT_LOCATION,
-										currentItem.getLocation());
-								Location gotoRabbit = new Location(CURRENT_LOCATION, toRabbit);
-								if (Util.isLocationEmpty((World) world, gotoRabbit)) {
-									return new MoveCommand(animal, gotoRabbit);
-								}
+		for (proximity = 1; proximity <= VIEW_RANGE; proximity++) {
+			for (Item currentItem : surroundingItems) {
+				if (currentItem.getLocation().getDistance(CURRENT_LOCATION) == proximity) {
+					// if item is a rabbit,
+					if (currentItem.getName().equals("Rabbit") && ENERGY < MAX_ENERGY - currentItem.getMeatCalories()) {
+						if (proximity == 1) {
+							if (currentItem.getStrength() < STRENGTH) {
+								return new EatCommand(animal, currentItem);
+							}
+						} else {
+							Direction toRabbit = Util.getDirectionTowards(CURRENT_LOCATION, currentItem.getLocation());
+							Location gotoRabbit = new Location(CURRENT_LOCATION, toRabbit);
+							if (Util.isLocationEmpty((World) world, gotoRabbit)) {
+								return new MoveCommand(animal, gotoRabbit);
 							}
 						}
-						// iterate through all surrounding items
+					}
+
+					if (currentItem.getName().equals("Fox")) {
+						Direction awayfromFox = Util.getDirectionTowards(currentItem.getLocation(), CURRENT_LOCATION);
+						Location ownTurf = new Location(CURRENT_LOCATION, awayfromFox);
+						if (Util.isLocationEmpty((World) world, ownTurf)) {
+							return new MoveCommand(animal, ownTurf);
+						}
 					}
 				}
-				count++;
 			}
 		}
 
-		return new WaitCommand();
+		if (ENERGY > BREEDING_ENERGY) {
+			return new BreedCommand(animal, Util.getRandomEmptyAdjacentLocation((World) world, CURRENT_LOCATION));
+		}
+
+		return new MoveCommand(animal, Util.getRandomEmptyAdjacentLocation((World) world, CURRENT_LOCATION));
+
 	}
 
 	/**

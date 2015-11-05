@@ -40,10 +40,6 @@ public class RabbitAI extends AbstractAI {
 		Set<Item> surroundingItems = new TreeSet<Item>();
 		surroundingItems = world.searchSurroundings(animal);
 
-		if (CURRENT_ENERGY == MAX_ENERGY) {
-			return new BreedCommand(animal, Util.getRandomEmptyAdjacentLocation((World) world, CURRENT_LOCATION));
-		}
-
 		// start from immediate proximity then move outwards
 		for (proximity = 1; proximity <= VIEW_RANGE; proximity++) {
 			for (Item currentItem : surroundingItems) {
@@ -116,6 +112,10 @@ public class RabbitAI extends AbstractAI {
 		// then breed if there is enough energy
 		if (CURRENT_ENERGY >= BREEDING_ENERGY) {
 			return new BreedCommand(animal, Util.getRandomEmptyAdjacentLocation((World) world, CURRENT_LOCATION));
+		}
+
+		if (CURRENT_ENERGY < MAX_ENERGY / 3) {
+			return new WaitCommand();
 		}
 
 		return new MoveCommand(animal, Util.getRandomEmptyAdjacentLocation((World) world, CURRENT_LOCATION));
