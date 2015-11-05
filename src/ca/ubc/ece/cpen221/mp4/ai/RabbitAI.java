@@ -1,6 +1,5 @@
 package ca.ubc.ece.cpen221.mp4.ai;
 
-import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -24,11 +23,6 @@ import ca.ubc.ece.cpen221.mp4.items.animals.Rabbit;
  * Your Rabbit AI.
  */
 public class RabbitAI extends AbstractAI {
-
-	private int closest = 10; // max number; greater than rabbit's view range
-	private int temp;
-	private boolean foxFound;
-
 	public RabbitAI() {
 	}
 
@@ -36,9 +30,10 @@ public class RabbitAI extends AbstractAI {
 	public Command getNextAction(ArenaWorld world, ArenaAnimal animal) {
 		// TODO: Change this. Implement your own AI rules.
 		final int MAX_ENERGY = animal.getMaxEnergy();
-		final int BREEDING_ENERGY = 50;
-		final Location CURRENT_LOCATION = animal.getLocation();
+		final int BREEDING_ENERGY = MAX_ENERGY;
 		final int CURRENT_ENERGY = animal.getEnergy();
+		
+		final Location CURRENT_LOCATION = animal.getLocation();
 		final int VIEW_RANGE = animal.getViewRange();
 		int proximity;
 
@@ -52,11 +47,15 @@ public class RabbitAI extends AbstractAI {
 		for (proximity = 1; proximity <= VIEW_RANGE; proximity++) {
 			for (Item currentItem : surroundingItems) {
 				if (currentItem.getLocation().getDistance(CURRENT_LOCATION) == proximity) {
-					if (proximity == 1) {
-						if (currentItem.getName().equals("Fox")) {
+					if (proximity < 2) {
+						if (currentItem.getName().equals("Fox") || currentItem.getName().equals("Rabbit")) {
 							Direction awayfromFox = Util.getDirectionTowards(currentItem.getLocation(),
 									CURRENT_LOCATION);
-							return new MoveCommand(animal, new Location(CURRENT_LOCATION, awayfromFox));
+							Location wheretorun = new Location(CURRENT_LOCATION, awayfromFox);
+							if (Util.isLocationEmpty((World) world, wheretorun)) {
+								return new MoveCommand(animal, wheretorun);
+							}
+
 						} else if (currentItem.getName().equals("grass") && CURRENT_ENERGY != MAX_ENERGY) {
 							return new EatCommand(animal, currentItem);
 						}
@@ -69,7 +68,10 @@ public class RabbitAI extends AbstractAI {
 						} else if (currentItem.getName().equals("grass")) {
 							Direction towardsFood = Util.getDirectionTowards(CURRENT_LOCATION,
 									currentItem.getLocation());
-							return new MoveCommand(animal, new Location(CURRENT_LOCATION, towardsFood));
+							Location wheretogo = new Location(CURRENT_LOCATION, towardsFood);
+							if (Util.isLocationEmpty((World) world, wheretogo)) {
+								return new MoveCommand(animal, wheretogo);
+							}
 						}
 					}
 				}
