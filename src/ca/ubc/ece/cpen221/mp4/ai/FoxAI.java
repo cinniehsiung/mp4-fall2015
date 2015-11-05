@@ -36,7 +36,6 @@ public class FoxAI extends AbstractAI {
         // TODO: Change this. Implement your own AI to make decisions regarding
         // the next action.
 
-        final int COOLDOWN = animal.getCoolDownPeriod();
         final Location CURRENT_LOCATION = animal.getLocation();
         final int ENERGY = animal.getEnergy();
         final int STRENGTH = animal.getStrength();
@@ -63,7 +62,7 @@ public class FoxAI extends AbstractAI {
 
             // breed if energy is greater than or equal to 100 (starting energy)
             if (ENERGY >= 60) {
-                animal.breed();
+                return new BreedCommand(animal, Util.getRandomEmptyAdjacentLocation((World)world, CURRENT_LOCATION));
             } else {
                 moveFromEdge(xCoord, yCoord, world, animal, CURRENT_LOCATION);
             }
