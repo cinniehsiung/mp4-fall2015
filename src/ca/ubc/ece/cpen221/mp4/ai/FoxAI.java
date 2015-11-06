@@ -65,7 +65,7 @@ public class FoxAI extends AbstractAI {
 						}
 					}
 
-					if (currentItem.getName().equals("Fox")) {
+					if ((currentItem.getName().equals("Fox") || currentItem.getName().equals("grass")) && proximity <= 2) {
 						Direction awayfromFox = Util.getDirectionTowards(currentItem.getLocation(), CURRENT_LOCATION);
 						Location ownTurf = new Location(CURRENT_LOCATION, awayfromFox);
 						if (Util.isLocationEmpty((World) world, ownTurf)) {
@@ -94,6 +94,7 @@ public class FoxAI extends AbstractAI {
 	 * @param y
 	 *            - coordinate of the animal's current location
 	 * 
+
 	 */
 
 	private Command moveFromEdge(int x, int y, ArenaWorld world, ArenaAnimal animal, Location currentLocation) {
