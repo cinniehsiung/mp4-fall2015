@@ -50,8 +50,8 @@ public class FoxAI extends AbstractAI {
 		for (proximity = 1; proximity <= VIEW_RANGE; proximity++) {
 			for (Item currentItem : surroundingItems) {
 				if (currentItem.getLocation().getDistance(CURRENT_LOCATION) == proximity) {
-					// if item is a rabbit,
-					if (currentItem.getName().equals("Rabbit") && ENERGY < MAX_ENERGY - currentItem.getMeatCalories()) {
+					// if item is a rabbit 
+					if (currentItem.getName().equals("Rabbit")) {
 						if (proximity == 1) {
 							if (currentItem.getStrength() < STRENGTH) {
 								return new EatCommand(animal, currentItem);
@@ -80,8 +80,9 @@ public class FoxAI extends AbstractAI {
 			return new BreedCommand(animal, Util.getRandomEmptyAdjacentLocation((World) world, CURRENT_LOCATION));
 		}
 
-		return new MoveCommand(animal, Util.getRandomEmptyAdjacentLocation((World) world, CURRENT_LOCATION));
-
+		Command move = moveFromEdge(CURRENT_LOCATION.getX(), CURRENT_LOCATION.getY(), world, animal, CURRENT_LOCATION);
+		return move;
+		
 	}
 
 	/**
@@ -93,31 +94,39 @@ public class FoxAI extends AbstractAI {
 	 * @param y
 	 *            - coordinate of the animal's current location
 	 * 
-	 *            currently, always moves east/west before north/south***
 	 */
 
-	private void moveFromEdge(int x, int y, ArenaWorld world, ArenaAnimal animal, Location currentLocation) {
-		// if fox is at left side of the arena, and is further west than north,
-		// move east
-		if (x < y && x <= 2) {
-			animal.moveTo(new Location(currentLocation, Direction.EAST));
+	private Command moveFromEdge(int x, int y, ArenaWorld world, ArenaAnimal animal, Location currentLocation) {
+		Location eastOf = new Location(currentLocation, Direction.EAST);
+		Location southOf = new Location(currentLocation, Direction.SOUTH);
+		Location westOf = new Location(currentLocation, Direction.WEST);
+		Location northOf = new Location(currentLocation, Direction.NORTH);
+		
+		Location randomLoc;
+	    
+	    // if fox is at top left quadrant, move east
+		if (y <= world.getHeight()/2 && x <= world.getWidth()/2 && isLocationEmpty(world, animal, eastOf)) {
+			return new MoveCommand(animal, eastOf);
 		}
-		// if fox is at right side of arena, and is further east than south,
-		// move west
-		else if (x > y && x >= (world.getWidth() - 2)) {
-			animal.moveTo(new Location(currentLocation, Direction.WEST));
+		// if fox is at top right quadrant, move south
+		else if (y <= world.getHeight()/2 && x >= world.getWidth()/2 && isLocationEmpty(world,animal,southOf)) {
+			return new MoveCommand(animal, southOf);
 		}
-		// if fox is at top of arena, move south
-		else if (y <= 2) {
-			animal.moveTo(new Location(currentLocation, Direction.SOUTH));
+		// if fox is at bottom right quadrant, move west
+		else if (y >= world.getHeight()/2 && x >= world.getWidth()/2 && isLocationEmpty(world, animal, westOf)) {
+			return new MoveCommand(animal, westOf);
 		}
 		// if fox is at bottom of arena, move north
-		else if (y >= (world.getHeight() - 2)) {
-			animal.moveTo(new Location(currentLocation, Direction.NORTH));
+		else if (y >= world.getHeight()/2 && x <= world.getWidth()/2 && isLocationEmpty(world, animal, northOf)) {
+			return new MoveCommand(animal, northOf);
 		}
 		// move in random direction
 		else {
-			animal.moveTo(new Location(currentLocation, Util.getRandomDirection()));
+		    do{
+		    randomLoc = Util.getRandomEmptyAdjacentLocation((World) world, currentLocation);
+		    } while(randomLoc.getDistance(currentLocation) > 1);
+		    
+			return new MoveCommand(animal, randomLoc);
 		}
 	}
 }
