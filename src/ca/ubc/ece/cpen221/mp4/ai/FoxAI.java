@@ -65,9 +65,9 @@ public class FoxAI extends AbstractAI {
 						}
 					}
 
-					if ((currentItem.getName().equals("Fox") || currentItem.getName().equals("grass")) && proximity <= 2) {
+					if ((currentItem.getName().equals("Fox") || currentItem.getName().equals("grass")) && proximity < 2) {
 						Direction awayfromFox = Util.getDirectionTowards(currentItem.getLocation(), CURRENT_LOCATION);
-						Location ownTurf = new Location(CURRENT_LOCATION, awayfromFox);
+						Location ownTurf = new Location(CURRENT_LOCATION, oppositeDir(awayfromFox));
 						if (Util.isLocationEmpty((World) world, ownTurf)) {
 							return new MoveCommand(animal, ownTurf);
 						}

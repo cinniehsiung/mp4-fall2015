@@ -57,6 +57,7 @@ public class Main {
 		addGnats(world);
 		addRabbits(world);
 		addFoxes(world);
+		addMoose(world);
 		// TODO: You may add your own creatures here!
 	}
 
@@ -95,4 +96,13 @@ public class Main {
 			world.addActor(rabbit);
 		}
 	}
+	
+	private void addMoose(World world) {
+        for (int i = 0; i < 3; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            Moose moose = new Moose(loc);
+            world.addItem(moose);
+            world.addActor(moose);
+        }
+    }
 }
