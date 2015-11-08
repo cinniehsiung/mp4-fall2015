@@ -21,20 +21,10 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
  * {@link Rabbit}s {@link Gnat}s and {@link Penguin}s)
  */
 
-public class Moose implements ArenaAnimal{
+public class Moose extends AbstractArenaAnimal{
         
-    private static final int INITIAL_ENERGY = 150;
-    private static final int MAX_ENERGY = 200;
-    private static final int STRENGTH = 100;
-    private static final int VIEW_RANGE = 7;
-    private static final int MIN_BREEDING_ENERGY = 120;
-    private static final int COOLDOWN = 5;
-    private boolean isDead;
-    
     private static final ImageIcon mooseImage = Util.loadImage("hunter.gif"); //TO CHANGE
     
-    private Location location;
-    private int energy;
     
     /**
      * Create a new Moose at <code>initialLocation</code>. The
@@ -44,23 +34,28 @@ public class Moose implements ArenaAnimal{
      *            the location where the Moose will be created
      */
     public Moose(Location initialLocation) {
-        this.location = initialLocation;
+        setINITIAL_ENERGY(150);
+        setEnergy(150);
         
-        this.energy = INITIAL_ENERGY;
+        setMAX_ENERGY(200);
+        setSTRENGTH(180);
+        setVIEW_RANGE(7);
+        setMIN_BREEDING_ENERGY(120);
+        setCOOLDOWN(5);
+        
+        setLocation(initialLocation);
+        
+        
     }
 
     @Override
     public LivingItem breed() {
-        Moose child = new Moose(location);
-        child.energy = energy / 2;
-        this.energy = energy / 2;
+        Moose child = new Moose(this.getLocation());
+        child.setEnergy(this.getEnergy()/ 2);
+        setEnergy(this.getEnergy() / 2);
         return child;
     }
 
-    @Override
-    public void eat(Food food) {
-        energy = Math.min(MAX_ENERGY, energy + food.getPlantCalories());
-    }
 
     @Override
     public String getName() {
@@ -71,100 +66,40 @@ public class Moose implements ArenaAnimal{
     public Command getNextAction(World world) {
         //if there is grass next to it, it will eat it - otherwise hurt all other weaker ArenaAnimals within 1 space of it
         for(Item currentItem : world.searchSurroundings(this)){
-            if(currentItem.getPlantCalories() > 0 && currentItem.getLocation().getDistance(location) == 1){
+            if(currentItem.getPlantCalories() > 0 && currentItem.getLocation().getDistance(this.getLocation()) == 1){
               return new EatCommand(this, currentItem);
             } 
-            else if(currentItem.getMeatCalories() > 0 && currentItem.getLocation().getDistance(location) == 1 && currentItem.getStrength() < STRENGTH){
+            else if(currentItem.getMeatCalories() > 0 && currentItem.getLocation().getDistance(this.getLocation()) == 1 && currentItem.getStrength() < this.getStrength()){
                 currentItem.loseEnergy(100);
             }
         }
         //if nothing to eat, and we have sufficient energy, breed
-        if(energy > MIN_BREEDING_ENERGY){
-            return new BreedCommand(this, Util.getRandomEmptyAdjacentLocation(world, location));
+        if(this.getEnergy() > this.getMinimumBreedingEnergy()){
+            return new BreedCommand(this, Util.getRandomEmptyAdjacentLocation(world, this.getLocation()));
         }
         
+        int count = 0;
         //otherwise move to a random location       
         Location targetLocation;
         do{
-            targetLocation = Util.getRandomEmptyAdjacentLocation(world, location);
-        }while(targetLocation.getDistance(location) > 1);  
+            targetLocation = Util.getRandomEmptyAdjacentLocation(world, this.getLocation());
+            if(targetLocation == null){
+                return new WaitCommand();
+            }
+            count++;
+        }while(targetLocation.getDistance(this.getLocation()) > 1 && count < 4);  
         
-        if (Util.isValidLocation(world, targetLocation) && Util.isLocationEmpty(world, targetLocation)) {
+        if (Util.isValidLocation(world, targetLocation) && Util.isLocationEmpty(world, targetLocation) && count < 4) {
             return new MoveCommand(this, targetLocation);
         }
 
         return new WaitCommand();        
     }
 
-    @Override
-    public int getEnergy() {
-        return energy;
-    }
-
-    @Override
-    public void moveTo(Location targetLocation) {
-        location = targetLocation;
-    }
-
-    @Override
-    public int getMovingRange() {
-        return 1;
-    }
 
     @Override
     public ImageIcon getImage() {
         return mooseImage;
-    }
-
-    @Override
-    public Location getLocation() {
-        return location;
-    }
-
-    @Override
-    public int getStrength() {
-        return STRENGTH;
-    }
-
-    @Override
-    public void loseEnergy(int energy) {
-        this.energy = this.getEnergy() - energy;        
-    }
-
-    @Override
-    public boolean isDead() {
-        return energy <=0;
-    }
-
-    @Override
-    public int getPlantCalories() {
-        return 0;
-    }
-
-    @Override
-    public int getMeatCalories() {
-        return energy;
-    }
-
-    @Override
-    public int getCoolDownPeriod() {
-        return COOLDOWN;
-    }
-
-    @Override
-    public int getMaxEnergy() {
-        return MAX_ENERGY;
-    }
-
-    @Override
-    public int getViewRange() {
-        return VIEW_RANGE;
-    }
-
-    @Override
-    public int getMinimumBreedingEnergy() {
-        
-        return MIN_BREEDING_ENERGY;
     }
 
 }

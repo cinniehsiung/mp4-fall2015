@@ -39,9 +39,7 @@ public class SabreToothTiger extends AbstractArenaAnimal {
         setMIN_BREEDING_ENERGY(150);
         setCOOLDOWN(2);
         setLocation(initialLocation); 
-                
-        System.out.println("STT made");
-                        
+                                        
     }
     
     @Override
@@ -57,13 +55,19 @@ public class SabreToothTiger extends AbstractArenaAnimal {
             return new BreedCommand(this, Util.getRandomEmptyAdjacentLocation(world, this.getLocation()));
         }
         
+        int count = 0;
+        
         //otherwise move to a random location       
         Location targetLocation;
         do{
             targetLocation = Util.getRandomEmptyAdjacentLocation(world, this.getLocation());
-        }while(targetLocation.getDistance(this.getLocation()) > 1);  
+            if(targetLocation == null){
+                return new WaitCommand();
+            }
+            count++;
+        }while(targetLocation.getDistance(this.getLocation()) > 1 && count < 4);  
         
-        if (Util.isValidLocation(world, targetLocation) && Util.isLocationEmpty(world, targetLocation)) {
+        if (Util.isValidLocation(world, targetLocation) && Util.isLocationEmpty(world, targetLocation)&& count < 4) {
             return new MoveCommand(this, targetLocation);
         }
 

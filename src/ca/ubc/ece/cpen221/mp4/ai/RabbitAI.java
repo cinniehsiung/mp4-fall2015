@@ -163,11 +163,20 @@ public class RabbitAI extends AbstractAI {
         }
         // move in random direction
         else {
+            int count = 0;
             do{
+            count++;    
             randomLoc = Util.getRandomEmptyAdjacentLocation((World) world, currentLocation);
-            } while(randomLoc.getDistance(currentLocation) > 1);
-            
-            return new MoveCommand(animal, randomLoc);
+            if(randomLoc == null){
+                return new WaitCommand();
+            }
+            } while(randomLoc.getDistance(currentLocation) > 1 && count < 4);
+            if(Util.isValidLocation(world, randomLoc) && Util.isLocationEmpty((World)world, randomLoc) && count < 4){
+                return new MoveCommand(animal, randomLoc);
+            }
+            else{
+                return new WaitCommand();
+            }
         }
     }
 }

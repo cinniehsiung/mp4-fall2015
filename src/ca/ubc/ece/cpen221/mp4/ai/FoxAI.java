@@ -123,11 +123,21 @@ public class FoxAI extends AbstractAI {
 		}
 		// move in random direction
 		else {
+		    int count = 0;
 		    do{
 		    randomLoc = Util.getRandomEmptyAdjacentLocation((World) world, currentLocation);
-		    } while(randomLoc.getDistance(currentLocation) > 1);
+		    if(randomLoc == null){
+                return new WaitCommand();
+            }
+		    count++;
+		    } while(randomLoc.getDistance(currentLocation) > 1 && count < 4);
 		    
-			return new MoveCommand(animal, randomLoc);
+		    if(Util.isValidLocation(world, randomLoc) && Util.isLocationEmpty((World) world, randomLoc) && count < 4){
+		        return new MoveCommand(animal, randomLoc);
+		    }
+		    else{
+		        return new WaitCommand();
+		    }
 		}
 	}
 }
