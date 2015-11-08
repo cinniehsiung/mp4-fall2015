@@ -65,7 +65,17 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract c
         return 1; //can only move one space each step
     }
     
-    @Override
+    public Command getNextAction(World world) {
+        if(Math.random() > 0.5){
+        
+        return Accelerate(world);
+        }
+        else{
+            return Turn(Util.getRandomDirection(), world);
+        }
+    }
+    
+    
     public Command Accelerate(World world){
         Location goTowards = new Location(this.location, currentDirection);
         
@@ -108,7 +118,7 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract c
         
     }
     
-    @Override
+    
     public Command Turn(Direction dir, World world){
         
         //if our current cooldown (speed) is less than the required turning speed, turn
