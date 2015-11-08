@@ -66,12 +66,16 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract c
     }
     
     public Command getNextAction(World world) {
-        if(Math.random() > 0.5){
         
-        return Accelerate(world);
-        }
-        else{
+        //if we're at the edge of the world, turn
+        if(location.getX() == 0 || location.getX() == world.getWidth()-1 || location.getY() == 0 || location.getY() == world.getHeight()-1){
             return Turn(Util.getRandomDirection(), world);
+
+        }
+        
+        //otherwise keep going straight
+        else{
+            return Accelerate(world);
         }
     }
     
