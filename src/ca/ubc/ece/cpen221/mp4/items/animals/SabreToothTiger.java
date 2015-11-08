@@ -4,100 +4,93 @@ import javax.swing.ImageIcon;
 
 import ca.ubc.ece.cpen221.mp4.Food;
 import ca.ubc.ece.cpen221.mp4.Location;
+import ca.ubc.ece.cpen221.mp4.Util;
 import ca.ubc.ece.cpen221.mp4.World;
+import ca.ubc.ece.cpen221.mp4.commands.BreedCommand;
 import ca.ubc.ece.cpen221.mp4.commands.Command;
+import ca.ubc.ece.cpen221.mp4.commands.EatCommand;
+import ca.ubc.ece.cpen221.mp4.commands.MoveCommand;
+import ca.ubc.ece.cpen221.mp4.commands.WaitCommand;
+import ca.ubc.ece.cpen221.mp4.items.Item;
 import ca.ubc.ece.cpen221.mp4.items.LivingItem;
 
-public class SabreToothTiger implements LivingItem {
 
+/**
+ * The SabreToothTiger is an {@link ArenaAnimal} that eats all other {@link ArenaAnimal}s
+ */
+public class SabreToothTiger extends AbstractArenaAnimal {
+
+    private static final ImageIcon STTImage = Util.loadImage("trucks.gif"); //TO CHANGE
+
+    /**
+     * Create a new SabreToothTiger at <code>initialLocation</code>. The
+     * <code>initialLocation</code> must be valid and empty.
+     *
+     * @param initialLocation
+     *            the location where the STT will be created
+     */
+    public SabreToothTiger(Location initialLocation) {
+        setINITIAL_ENERGY(150);
+        setEnergy(150);
+
+        setMAX_ENERGY(200);
+        setSTRENGTH(150);
+        setVIEW_RANGE(2);
+        setMIN_BREEDING_ENERGY(150);
+        setCOOLDOWN(2);
+        setLocation(initialLocation); 
+                
+        System.out.println("STT made");
+                        
+    }
+    
     @Override
-    public void moveTo(Location targetLocation) {
-        // TODO Auto-generated method stub
+    public Command getNextAction(World world) {
+        //if there is any ArenaAnimal next to the STT, it will eat it
+        for(Item currentItem : world.searchSurroundings(this)){
+            if(currentItem.getMeatCalories() > 0 && currentItem.getLocation().getDistance(this.getLocation()) == 1 && currentItem.getStrength() < this.getStrength()){
+              return new EatCommand(this, currentItem);
+            }
+        }
+        //if nothing to eat, and we have sufficient energy, breed
+        if(this.getEnergy() > this.getMinimumBreedingEnergy()){
+            return new BreedCommand(this, Util.getRandomEmptyAdjacentLocation(world, this.getLocation()));
+        }
+        
+        //otherwise move to a random location       
+        Location targetLocation;
+        do{
+            targetLocation = Util.getRandomEmptyAdjacentLocation(world, this.getLocation());
+        }while(targetLocation.getDistance(this.getLocation()) > 1);  
+        
+        if (Util.isValidLocation(world, targetLocation) && Util.isLocationEmpty(world, targetLocation)) {
+            return new MoveCommand(this, targetLocation);
+        }
+
+        return new WaitCommand(); 
+        
         
     }
-
+    
     @Override
-    public int getMovingRange() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public ImageIcon getImage() {
-        // TODO Auto-generated method stub
-        return null;
+    public LivingItem breed() {
+        
+        SabreToothTiger child = new SabreToothTiger(this.getLocation());
+        child.setEnergy(this.getEnergy() / 2);
+        setEnergy(this.getEnergy() / 2);
+        return child;
     }
 
     @Override
     public String getName() {
-        // TODO Auto-generated method stub
-        return null;
+        return "SabreToothTiger";
     }
 
     @Override
-    public Location getLocation() {
-        // TODO Auto-generated method stub
-        return null;
+    public ImageIcon getImage() {
+        return STTImage;
     }
 
-    @Override
-    public int getStrength() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void loseEnergy(int energy) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public boolean isDead() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public int getPlantCalories() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getMeatCalories() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getCoolDownPeriod() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public Command getNextAction(World world) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public int getEnergy() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public LivingItem breed() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public void eat(Food food) {
-        // TODO Auto-generated method stub
-        
-    }
+  
 
 }

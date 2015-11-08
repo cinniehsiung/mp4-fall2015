@@ -58,6 +58,8 @@ public class Main {
 		addRabbits(world);
 		addFoxes(world);
 		addMoose(world);
+		addSabreToothTiger(world);
+		
 		// TODO: You may add your own creatures here!
 	}
 
@@ -98,11 +100,19 @@ public class Main {
 	}
 	
 	private void addMoose(World world) {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 10; i++) {
             Location loc = Util.getRandomEmptyLocation(world);
             Moose moose = new Moose(loc);
             world.addItem(moose);
             world.addActor(moose);
+        }
+    }
+	private void addSabreToothTiger(World world) {
+        for (int i = 0; i < 10; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            SabreToothTiger STT = new SabreToothTiger(loc);
+            world.addItem(STT);
+            world.addActor(STT);
         }
     }
 }
