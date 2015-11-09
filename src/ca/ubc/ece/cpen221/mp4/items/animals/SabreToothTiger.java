@@ -20,7 +20,7 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
  */
 public class SabreToothTiger extends AbstractArenaAnimal {
 
-    private static final ImageIcon STTImage = Util.loadImage("trucks.gif"); //TO CHANGE
+    private static final ImageIcon STTImage = Util.loadImage("bulba..gif"); //TO CHANGE
 
     /**
      * Create a new SabreToothTiger at <code>initialLocation</code>. The

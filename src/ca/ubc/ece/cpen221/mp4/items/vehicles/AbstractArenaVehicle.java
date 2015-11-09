@@ -65,12 +65,12 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract c
         return 1; //can only move one space each step
     }
     
+    @Override
     public Command getNextAction(World world) {
         
         //if we're at the edge of the world, turn
         if(location.getX() == 0 || location.getX() == world.getWidth()-1 || location.getY() == 0 || location.getY() == world.getHeight()-1){
             return Turn(Util.getRandomDirection(), world);
-
         }
         
         //otherwise keep going straight
