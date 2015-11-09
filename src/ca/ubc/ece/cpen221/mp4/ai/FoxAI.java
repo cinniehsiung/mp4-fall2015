@@ -65,9 +65,9 @@ public class FoxAI extends AbstractAI {
 						}
 					}
 
-					if (currentItem.getName().equals("Fox")) {
+					if ((currentItem.getName().equals("Fox") || currentItem.getName().equals("grass")) && proximity < 2) {
 						Direction awayfromFox = Util.getDirectionTowards(currentItem.getLocation(), CURRENT_LOCATION);
-						Location ownTurf = new Location(CURRENT_LOCATION, awayfromFox);
+						Location ownTurf = new Location(CURRENT_LOCATION, oppositeDir(awayfromFox));
 						if (Util.isLocationEmpty((World) world, ownTurf)) {
 							return new MoveCommand(animal, ownTurf);
 						}
@@ -94,6 +94,7 @@ public class FoxAI extends AbstractAI {
 	 * @param y
 	 *            - coordinate of the animal's current location
 	 * 
+
 	 */
 
 	private Command moveFromEdge(int x, int y, ArenaWorld world, ArenaAnimal animal, Location currentLocation) {
@@ -122,11 +123,21 @@ public class FoxAI extends AbstractAI {
 		}
 		// move in random direction
 		else {
+		    int count = 0;
 		    do{
 		    randomLoc = Util.getRandomEmptyAdjacentLocation((World) world, currentLocation);
-		    } while(randomLoc.getDistance(currentLocation) > 1);
+		    if(randomLoc == null){
+                return new WaitCommand();
+            }
+		    count++;
+		    } while(randomLoc.getDistance(currentLocation) > 1 && count < 4);
 		    
-			return new MoveCommand(animal, randomLoc);
+		    if(Util.isValidLocation(world, randomLoc) && Util.isLocationEmpty((World) world, randomLoc) && count < 4){
+		        return new MoveCommand(animal, randomLoc);
+		    }
+		    else{
+		        return new WaitCommand();
+		    }
 		}
 	}
 }

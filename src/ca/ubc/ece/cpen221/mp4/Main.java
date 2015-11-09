@@ -34,7 +34,10 @@ public class Main {
 	static final int INITIAL_MANS = INITIAL_GRASS / 150;
 	static final int INITIAL_WOMANS = INITIAL_GRASS / 100;
 	static final int INITIAL_HUNTERS = INITIAL_GRASS / 150;
-
+	static final int INITIAL_MOOSE = INITIAL_GRASS / 40;
+	static final int INITIAL_SABRETOOTHTIGERS = INITIAL_GRASS / 50;
+	static final int INITIAL_PENGUINS = INITIAL_GRASS / 35;
+ 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
@@ -57,6 +60,11 @@ public class Main {
 		addGnats(world);
 		addRabbits(world);
 		addFoxes(world);
+		addMoose(world);
+		addSabreToothTiger(world);
+		addPenguin(world);
+		
+		
 		// TODO: You may add your own creatures here!
 	}
 
@@ -95,4 +103,29 @@ public class Main {
 			world.addActor(rabbit);
 		}
 	}
+	
+	private void addMoose(World world) {
+        for (int i = 0; i < INITIAL_MOOSE; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            Moose moose = new Moose(loc);
+            world.addItem(moose);
+            world.addActor(moose);
+        }
+    }
+	private void addSabreToothTiger(World world) {
+        for (int i = 0; i < INITIAL_SABRETOOTHTIGERS; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            SabreToothTiger STT = new SabreToothTiger(loc);
+            world.addItem(STT);
+            world.addActor(STT);
+        }
+    }
+	private void addPenguin(World world) {
+        for (int i = 0; i < INITIAL_PENGUINS; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            Penguin penguin = new Penguin(loc);
+            world.addItem(penguin);
+            world.addActor(penguin);
+        }
+    }
 }
