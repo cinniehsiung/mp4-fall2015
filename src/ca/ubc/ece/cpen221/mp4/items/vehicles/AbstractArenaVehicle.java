@@ -67,9 +67,14 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract c
     
     @Override
     public Command getNextAction(World world) {
-        
+        Direction randomDir;
         //if we're at the edge of the world, turn
         if(location.getX() == 0 || location.getX() == world.getWidth()-1 || location.getY() == 0 || location.getY() == world.getHeight()-1){
+            
+            //loop through random directions until it chooses one that isn't the current direction, then turn in new direction
+            do{randomDir = Util.getRandomDirection();            
+            }while(randomDir.equals(currentDirection));
+            
             return Turn(Util.getRandomDirection(), world);
         }
         
@@ -83,9 +88,13 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract c
     public Command Accelerate(World world){
         Location goTowards = new Location(this.location, currentDirection);
         
-        //if we're going towards an empty spot, go forward and increase speed (cooldown)
+        //if we're going towards an empty spot, go forward and increase speed (decrease cooldown)
         if(Util.isLocationEmpty(world, goTowards)){
-            currentCooldown++;
+            //avoid making cooldown 0
+            if(currentCooldown > 1){
+                //decrease cooldown to speed up car
+                currentCooldown--;
+            }
             return new MoveCommand(this, goTowards);
         }
         //if spot is occupied, crash
@@ -156,9 +165,9 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract c
             }
         }
                
-        //if not, then slow down (reduce cooldown)
+        //if not, then slow down (increase cooldown)
         else{
-            currentCooldown--;
+            currentCooldown++;
             return new WaitCommand();
         }
         
