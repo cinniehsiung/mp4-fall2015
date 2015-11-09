@@ -36,6 +36,7 @@ public class RabbitAI extends AbstractAI {
 		final Location CURRENT_LOCATION = animal.getLocation();
 		final int VIEW_RANGE = animal.getViewRange();
 		int proximity;
+		boolean foxfound = false;
 
 		Location randomLoc;
 

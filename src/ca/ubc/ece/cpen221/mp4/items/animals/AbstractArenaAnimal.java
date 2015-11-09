@@ -122,7 +122,7 @@ public abstract class AbstractArenaAnimal implements ArenaAnimal { // abstract
 	}
 
 	@Override
-	public int getPlantCalories() { // arena animals dont eat plants
+	public int getPlantCalories() { // arena animals don't eat plants
 		return 0;
 	}
 
