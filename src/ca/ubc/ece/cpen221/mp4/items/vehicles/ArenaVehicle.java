@@ -27,6 +27,12 @@ public interface ArenaVehicle extends MoveableItem{
      */
     int getCoolDownPeriod();
 
+    
+    /**
+     * Method for getting the next action.
+     * @param world
+     * @return
+     */
     Command getNextAction(World world);
     
     
