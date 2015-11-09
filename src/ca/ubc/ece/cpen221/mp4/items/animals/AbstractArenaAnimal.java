@@ -49,7 +49,6 @@ public abstract class AbstractArenaAnimal implements ArenaAnimal { // abstract
 		this.MAX_ENERGY = i;
 	}
 	
-	
 
 	protected void setSTRENGTH(int i) {
 		this.STRENGTH = i;

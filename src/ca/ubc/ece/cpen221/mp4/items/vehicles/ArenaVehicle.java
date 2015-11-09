@@ -2,7 +2,9 @@ package ca.ubc.ece.cpen221.mp4.items.vehicles;
 
 import javax.swing.ImageIcon;
 
+import ca.ubc.ece.cpen221.mp4.Direction;
 import ca.ubc.ece.cpen221.mp4.Location;
+import ca.ubc.ece.cpen221.mp4.World;
 import ca.ubc.ece.cpen221.mp4.commands.Command;
 import ca.ubc.ece.cpen221.mp4.items.MoveableItem;
 
@@ -17,22 +19,15 @@ import ca.ubc.ece.cpen221.mp4.items.MoveableItem;
  */
 public interface ArenaVehicle extends MoveableItem{
 
-    /**
-     * Method for accelerating an ArenaVehicle. High speeds can only be achieved over time. 
-     * 
-     */
-    Command Accelerate();
+   
 
     /**
      * Method for getting the cooldown period of a vehicle (represents its speed)
      * @return the current cool-down period
      */
     int getCoolDownPeriod();
+
+    Command getNextAction(World world);
     
-    /**
-     * Method for changing directions in a vehilce. Can only happen at low enough speeds.
-     * @return
-     */
-    Command Turn();
     
 }
