@@ -24,17 +24,18 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
  *
  */
 public class Penguin extends InfectableArenaAnimal {
-    
-    private final int INITIAL_ENERGY = 80;
-    private final int MAX_ENERGY = 100;
-    private final int STRENGTH = 80;
-    private final int VIEW_RANGE = 4;
-    private final int MIN_BREEDING_ENERGY = 40;
-    private final int COOLDOWN = 2;
-    
+
+	// initial fields
+	private final int INITIAL_ENERGY = 80;
+	private final int MAX_ENERGY = 100;
+	private final int STRENGTH = 80;
+	private final int VIEW_RANGE = 4;
+	private final int MIN_BREEDING_ENERGY = 40;
+	private final int COOLDOWN = 2;
+
 	private final AI ai;
 	private static final ImageIcon PenguinImage = Util.loadImage("penguin.gif"); // TO
-																				// CHANGE
+																					// CHANGE
 
 	/**
 	 * Create a new Penguin at <code>initialLocation</code>. The
@@ -52,7 +53,7 @@ public class Penguin extends InfectableArenaAnimal {
 		setINITIAL_VIEW_RANGE(VIEW_RANGE);
 		setMIN_BREEDING_ENERGY(MIN_BREEDING_ENERGY);
 		setCOOLDOWN(COOLDOWN);
-		
+
 		setLocation(initialLocation);
 		this.ai = penguinAI;
 		this.healVirus();
@@ -73,7 +74,7 @@ public class Penguin extends InfectableArenaAnimal {
 		setEnergy(this.getEnergy() - 1); // Loses 1 energy regardless of action.
 		return nextAction;
 	}
-	
+
 	@Override
 	public String getName() {
 		return "Penguin";

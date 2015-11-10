@@ -14,23 +14,27 @@ import ca.ubc.ece.cpen221.mp4.items.Item;
 import ca.ubc.ece.cpen221.mp4.items.animals.ArenaAnimal;
 import ca.ubc.ece.cpen221.mp4.items.animals.InfectableArenaAnimal;
 
+/**
+ * Our Penguin AI.
+ */
 public class PenguinAI extends InfectableArenaAnimalAI {
 
 	public PenguinAI() {
-		// TODO Auto-generated constructor stub
+		// empty constructor
 	}
 
 	@Override
 	public Command getNextAction(ArenaWorld world, ArenaAnimal animal) {
+		// if the virus is infected, have the virus do stuff
 		InfectableArenaAnimal infectableAnimal = (InfectableArenaAnimal) animal;
 		if (infectableAnimal.isInfected()) {
 			doInfectedActions(world, (InfectableArenaAnimal) animal);
-			
-			if(animal.getViewRange() == CATARACTS_REACH){
+
+			if (animal.getViewRange() == CATARACTS_REACH) {
 				return new WaitCommand();
 			}
 		}
-		
+
 		// if there is grass / gnats next to the Penguin, it will eat it
 		for (Item currentItem : world.searchSurroundings(animal)) {
 			if (currentItem.getPlantCalories() > 0
@@ -51,12 +55,11 @@ public class PenguinAI extends InfectableArenaAnimalAI {
 			}
 		}
 
-		
 		Location randomAdjLoc = Util.getRandomEmptyAdjacentLocation((World) world, animal.getLocation());
-        // if nothing to eat, and we have sufficient energy, breed
-        if (animal.getEnergy() > animal.getMinimumBreedingEnergy() && randomAdjLoc != null) {
-            return new BreedCommand(animal, randomAdjLoc);
-        }
+		// if nothing to eat, and we have sufficient energy, breed
+		if (animal.getEnergy() > animal.getMinimumBreedingEnergy() && randomAdjLoc != null) {
+			return new BreedCommand(animal, randomAdjLoc);
+		}
 
 		int count = 0;
 		// otherwise move to a random location

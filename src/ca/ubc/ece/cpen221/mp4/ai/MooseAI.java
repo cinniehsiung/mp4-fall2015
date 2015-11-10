@@ -14,10 +14,13 @@ import ca.ubc.ece.cpen221.mp4.items.Item;
 import ca.ubc.ece.cpen221.mp4.items.animals.ArenaAnimal;
 import ca.ubc.ece.cpen221.mp4.items.animals.InfectableArenaAnimal;
 
+/**
+ * Our Moose AI.
+ */
 public class MooseAI extends InfectableArenaAnimalAI {
 
 	public MooseAI() {
-		// TODO Auto-generated constructor stub
+		// empty constructor
 	}
 
 	@Override
@@ -26,7 +29,6 @@ public class MooseAI extends InfectableArenaAnimalAI {
 		InfectableArenaAnimal infectableAnimal = (InfectableArenaAnimal) animal;
 		if (infectableAnimal.isInfected()) {
 			doInfectedActions(world, (InfectableArenaAnimal) animal);
-
 			if (animal.getViewRange() == CATARACTS_REACH) {
 				return new WaitCommand();
 			}
