@@ -21,7 +21,7 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
  * {@link Rabbit}s {@link Gnat}s and {@link Penguin}s)
  */
 
-public class Moose extends AbstractArenaAnimal{
+public class Moose extends InfectableArenaAnimal{
         
     private static final ImageIcon mooseImage = Util.loadImage("hunter.gif"); //TO CHANGE
     
@@ -42,7 +42,7 @@ public class Moose extends AbstractArenaAnimal{
         setVIEW_RANGE(7);
         setMIN_BREEDING_ENERGY(120);
         setCOOLDOWN(5);
-        
+
         setLocation(initialLocation);
         
         

@@ -6,6 +6,7 @@ import ca.ubc.ece.cpen221.mp4.ai.*;
 import ca.ubc.ece.cpen221.mp4.items.Gardener;
 import ca.ubc.ece.cpen221.mp4.items.Grass;
 import ca.ubc.ece.cpen221.mp4.items.animals.*;
+import ca.ubc.ece.cpen221.mp4.items.viruses.BlackPlague;
 import ca.ubc.ece.cpen221.mp4.staff.WorldImpl;
 import ca.ubc.ece.cpen221.mp4.staff.WorldUI;
 
@@ -37,6 +38,7 @@ public class Main {
 	static final int INITIAL_MOOSE = INITIAL_GRASS / 40;
 	static final int INITIAL_SABRETOOTHTIGERS = INITIAL_GRASS / 50;
 	static final int INITIAL_PENGUINS = INITIAL_GRASS / 35;
+	static final int INITIAL_VIRUS = 5;
  
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -63,6 +65,7 @@ public class Main {
 		addMoose(world);
 		addSabreToothTiger(world);
 		addPenguin(world);
+		addBlackPlague(world);
 		
 		
 		// TODO: You may add your own creatures here!
@@ -121,11 +124,21 @@ public class Main {
         }
     }
 	private void addPenguin(World world) {
+		PenguinAI penguinAI = new PenguinAI(10);
         for (int i = 0; i < INITIAL_PENGUINS; i++) {
             Location loc = Util.getRandomEmptyLocation(world);
-            Penguin penguin = new Penguin(loc);
+            Penguin penguin = new Penguin(penguinAI, loc);
             world.addItem(penguin);
             world.addActor(penguin);
+        }
+    }
+	
+	private void addBlackPlague(World world) {
+        for (int i = 0; i < INITIAL_VIRUS; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            BlackPlague blackplague = new BlackPlague(loc);
+            world.addItem(blackplague);
+            world.addActor(blackplague);
         }
     }
 }

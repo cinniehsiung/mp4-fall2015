@@ -18,9 +18,9 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
 /**
  * The SabreToothTiger is an {@link ArenaAnimal} that eats all other {@link ArenaAnimal}s
  */
-public class SabreToothTiger extends AbstractArenaAnimal {
+public class SabreToothTiger extends InfectableArenaAnimal {
 
-    private static final ImageIcon STTImage = Util.loadImage("bulba..gif"); //TO CHANGE
+    private static final ImageIcon STTImage = Util.loadImage("bulba.gif"); //TO CHANGE
 
     /**
      * Create a new SabreToothTiger at <code>initialLocation</code>. The

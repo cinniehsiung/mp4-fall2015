@@ -3,67 +3,44 @@ package ca.ubc.ece.cpen221.mp4.items.viruses;
 import javax.swing.ImageIcon;
 
 import ca.ubc.ece.cpen221.mp4.Location;
+import ca.ubc.ece.cpen221.mp4.Util;
+import ca.ubc.ece.cpen221.mp4.World;
+import ca.ubc.ece.cpen221.mp4.ai.AI;
+import ca.ubc.ece.cpen221.mp4.items.MoveableItem;
+import ca.ubc.ece.cpen221.mp4.items.animals.ArenaAnimal;
+import ca.ubc.ece.cpen221.mp4.items.animals.Fox;
 
-public class BlackPlague implements ArenaVirus {
+public class BlackPlague extends AbstractArenaVirus {
 
-    @Override
-    public void moveTo(Location targetLocation) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public int getMovingRange() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public ImageIcon getImage() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public String getName() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Location getLocation() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public int getStrength() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void loseEnergy(int energy) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public boolean isDead() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public int getPlantCalories() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getMeatCalories() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
+	private static final int CONTAGIOUS_RANGE = 3;
+	private static final int INFECTION_TIME = 5;
+	private static final ImageIcon IMAGE = Util.loadImage("unknown.gif");
+	private static final String VIRUS_NAME = "BlackPlague";
+	
+	//private final AI ai;
+	private Location location;
+	private int energy = 1;
+	
+	 /**
+     * Create a new BlackPlague at <code>initialLocation</code>. The
+     * <code>initialLocation</code> must be valid and empty.
+     *
+     * @param initialLocation
+     *            the location where the BlackPlague will be created
+     */
+	public BlackPlague(Location initialLocation){
+		setContagiousRange(CONTAGIOUS_RANGE);
+		setInfectionTime(INFECTION_TIME);
+		setLocation(initialLocation);
+	}
+	
+	
+	@Override
+	public String getName() {
+		return VIRUS_NAME;
+	}
+	
+	public ImageIcon getImage() {
+		return IMAGE;
+	}
 }
