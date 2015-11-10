@@ -4,12 +4,14 @@ import javax.swing.ImageIcon;
 
 import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.Util;
-import ca.ubc.ece.cpen221.mp4.World;
-import ca.ubc.ece.cpen221.mp4.ai.AI;
-import ca.ubc.ece.cpen221.mp4.items.MoveableItem;
-import ca.ubc.ece.cpen221.mp4.items.animals.ArenaAnimal;
-import ca.ubc.ece.cpen221.mp4.items.animals.Fox;
 import ca.ubc.ece.cpen221.mp4.items.animals.InfectableArenaAnimal;
+
+/**
+ * A {@link BlackPlague} is an {@link ArenaVirus} that damages infected {@link ArenaAnimals} (causes them to lose a 
+ * specified amount of energy) every time the ArenaAnimal calls the getNextAction method. The infection lasts for 
+ * 5 steps, and has a contagious range of 10.  
+ * 
+ */
 
 public class BlackPlague extends AbstractArenaVirus {
 
@@ -18,9 +20,6 @@ public class BlackPlague extends AbstractArenaVirus {
 	private static final ImageIcon IMAGE = Util.loadImage("blackplague.gif");
 	private static final String VIRUS_NAME = "BlackPlague";
 	
-	//private final AI ai;
-	private Location location;
-	private int energy = 1;
 	
 	 /**
      * Create a new BlackPlague at <code>initialLocation</code>. The

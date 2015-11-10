@@ -6,15 +6,19 @@ import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.Util;
 import ca.ubc.ece.cpen221.mp4.items.animals.InfectableArenaAnimal;
 
+/**
+ * A {@link Panacea} is an {@link ArenaVirus} that infects {@link ArenaAnimals} by healing the ArenaAnimal to their MAX_ENERGY 
+ * for 2 times that the ArenaAnimal calls the getNextAction method. Panacea has an infection time of 2 steps, and a 
+ * contagious range of 1.
+ *
+ */
+
 public class Panacea extends AbstractArenaVirus {
 	private static final int CONTAGIOUS_RANGE = 1;
 	private static final int INFECTION_TIME = 2;
 	private static final ImageIcon IMAGE = Util.loadImage("panacea.gif");
 	private static final String VIRUS_NAME = "Panacea";
 
-	// private final AI ai;
-	private Location location;
-	private int energy = 1;
 
 	/**
 	 * Create a new BlackPlague at <code>initialLocation</code>. The
