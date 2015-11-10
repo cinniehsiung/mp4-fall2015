@@ -35,10 +35,11 @@ public class SabreToothTigerAI extends InfectableArenaAnimalAI {
 				return new EatCommand(animal, currentItem);
 			}
 		}
-		// if nothing to eat, and we have sufficient energy, breed
-		if (animal.getEnergy() > animal.getMinimumBreedingEnergy()) {
-			return new BreedCommand(animal, Util.getRandomEmptyAdjacentLocation((World) world, animal.getLocation()));
-		}
+		Location randomAdjLoc = Util.getRandomEmptyAdjacentLocation((World) world, animal.getLocation());
+        // if nothing to eat, and we have sufficient energy, breed
+        if (animal.getEnergy() > animal.getMinimumBreedingEnergy() && randomAdjLoc != null) {
+            return new BreedCommand(animal, randomAdjLoc);
+        }
 
 		int count = 0;
 

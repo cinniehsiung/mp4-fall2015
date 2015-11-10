@@ -21,13 +21,14 @@ import ca.ubc.ece.cpen221.mp4.items.animals.Gnat;
 
 public abstract class AbstractArenaVehicle implements ArenaVehicle {
     
+    //Constants for each Vehicle 
     private int STRENGTH;
     private int VIEW_RANGE;
     private int INITIAL_COOLDOWN;
     private int currentCooldown;
     private boolean isDead;
     private int TURNING_SPEED;
-    private int energy = Integer.MAX_VALUE; //arbitrary energy, vehicles do not gain/lose energy
+    //private int energy = Integer.MAX_VALUE; //arbitrary energy, vehicles do not gain/lose energy
     private int SPEED_RATE;
     
     private Direction currentDirection;    
@@ -123,7 +124,7 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle {
                     //if not, we are destroyed
                     else{
                         this.isDead = true;
-                        this.energy = 0;
+                        //this.energy = 0;
                         return new WaitCommand();
                     }
                 }
@@ -166,7 +167,7 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle {
                     //if not, we are destroyed
                     else{
                         this.isDead = true;
-                        this.energy = 0;
+                        //this.energy = 0;
                         return new WaitCommand();
                     }
                 }
