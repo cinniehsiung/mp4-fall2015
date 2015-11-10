@@ -10,7 +10,7 @@ public abstract class InfectableArenaAnimalAI extends ArenaAnimalAI {
 		// empty constructor, to be overwritten by individual animals
 	}
 
-	final private int BLACK_PLAGUE_DAMAGE = 500;
+	final private int BLACK_PLAGUE_DAMAGE = 20;
 	public final int CATARACTS_REACH = -1;
 
 	@Override

@@ -2,15 +2,12 @@ package ca.ubc.ece.cpen221.mp4.items.vehicles;
 
 import javax.swing.ImageIcon;
 
-import ca.ubc.ece.cpen221.mp4.Direction;
 import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.Util;
-import ca.ubc.ece.cpen221.mp4.ai.AI;
-import ca.ubc.ece.cpen221.mp4.items.viruses.AbstractArenaVirus;
 
 /**
  * A Helicopter is an {@link ArenaVehicle} that is able to move quickly and turn at high speeds. It also accelerates at a moderate
- * rate.   
+ * rate (coolDown changes by +/- 2)  
  *
  */
 public class Helicopter extends AbstractArenaVehicle {

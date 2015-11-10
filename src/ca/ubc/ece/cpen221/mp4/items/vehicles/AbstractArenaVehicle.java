@@ -2,22 +2,15 @@ package ca.ubc.ece.cpen221.mp4.items.vehicles;
 
 import javax.swing.ImageIcon;
 
-import ca.ubc.ece.cpen221.mp4.Actor;
 import ca.ubc.ece.cpen221.mp4.Direction;
 import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.Util;
 import ca.ubc.ece.cpen221.mp4.World;
-import ca.ubc.ece.cpen221.mp4.ai.AI;
 import ca.ubc.ece.cpen221.mp4.commands.Command;
 import ca.ubc.ece.cpen221.mp4.commands.MoveCommand;
 import ca.ubc.ece.cpen221.mp4.commands.WaitCommand;
-import ca.ubc.ece.cpen221.mp4.items.Grass;
 import ca.ubc.ece.cpen221.mp4.items.Item;
-import ca.ubc.ece.cpen221.mp4.items.MoveableItem;
 import ca.ubc.ece.cpen221.mp4.items.vehicles.ArenaVehicle;
-import ca.ubc.ece.cpen221.mp4.items.viruses.ArenaVirus;
-import ca.ubc.ece.cpen221.mp4.items.animals.ArenaAnimal;
-import ca.ubc.ece.cpen221.mp4.items.animals.Gnat;
 
 public abstract class AbstractArenaVehicle implements ArenaVehicle { // abstract
                                                                      // class
@@ -37,30 +30,71 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle { // abstract
     private Location location;
 
     // Protected methods for setting the constants for each ArenaVehicle
+    /**
+     * Method to set the strength of an ArenaVehicle.
+     * @param int i 
+     *          Strength of the ArenaVehicle
+     */
     protected void setSTRENGTH(int i) {
         this.STRENGTH = i;
     }
-
+    
+    /**
+     * Method to set the view range of an ArenaVehicle.
+     * 
+     * @param int i
+     *          View range of the ArenaVehicle.
+     */
     protected void setVIEW_RANGE(int i) {
         this.VIEW_RANGE = i;
     }
 
+    /**
+     * Method to set the Location of an ArenaVehicle.
+     * 
+     * @param Location loc
+     *          Location of the ArenaVehicle.
+     */
     protected void setLocation(Location loc) {
         this.location = loc;
     }
 
+    /**
+     * Method to set the initial cooldown (initial speed) of the ArenaVehicle.
+     * 
+     * @param int i
+     *          Initial cooldown of the ArenaVehicle.
+     */
     protected void setINITIAL_COOLDOWN(int i) {
         this.INITIAL_COOLDOWN = i;
     }
 
+    /**
+     * Method to set the turning speed (constant) of the ArenaVehicle. For an ArenaVehicle to turn, its current speed has to be lower than
+     * its turning speed (so its currentCoolDown has to be higher than the TURNING_SPEED). 
+     * @param int i 
+     *          Turning speed of the ArenaVehicle.
+     * 
+     */
     protected void setTURNING_SPEED(int i) {
         this.TURNING_SPEED = i;
     }
-
+    
+    /**
+     * Method to set the current direction the given ArenaVehicle is going towards.
+     * 
+     * @param Direction dir
+     *          Direction that the ArenaVehicle is heading towards.
+     */
     protected void setcurrentDirection(Direction dir) {
         this.currentDirection = dir;
     }
-
+    
+    /**
+     * Method to set the acceleration of the given ArenaVehicle (the rate at which its current speed (or cooldown)) changes.
+     * @param int i
+     *          The rate at which the speed of the ArenaVehicle will change.
+     */
     protected void setSPEED_RATE(int i) {
         this.SPEED_RATE = i;
     }
@@ -208,12 +242,6 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle { // abstract
     }
 
     @Override
-    public abstract ImageIcon getImage();
-
-    @Override
-    public abstract String getName();
-
-    @Override
     public Location getLocation() {
         return location;
     }
@@ -244,5 +272,11 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle { // abstract
         // vehicles are not animals
         return 0;
     }
+    
+    @Override
+    public abstract ImageIcon getImage();
+
+    @Override
+    public abstract String getName();
 
 }

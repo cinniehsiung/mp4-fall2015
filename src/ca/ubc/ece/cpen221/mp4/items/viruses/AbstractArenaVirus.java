@@ -1,6 +1,5 @@
 package ca.ubc.ece.cpen221.mp4.items.viruses;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -9,12 +8,10 @@ import javax.swing.ImageIcon;
 import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.Util;
 import ca.ubc.ece.cpen221.mp4.World;
-import ca.ubc.ece.cpen221.mp4.ai.AI;
 import ca.ubc.ece.cpen221.mp4.commands.Command;
 import ca.ubc.ece.cpen221.mp4.commands.MoveCommand;
 import ca.ubc.ece.cpen221.mp4.commands.WaitCommand;
 import ca.ubc.ece.cpen221.mp4.items.Item;
-import ca.ubc.ece.cpen221.mp4.items.MoveableItem;
 import ca.ubc.ece.cpen221.mp4.items.animals.InfectableArenaAnimal;
 
 public abstract class AbstractArenaVirus implements ArenaVirus {
@@ -22,13 +19,10 @@ public abstract class AbstractArenaVirus implements ArenaVirus {
 	private int CONTAGIOUS_RANGE;
 	private int INFECTION_TIME;
 	private ImageIcon image;
-	private boolean isDead;
-
-	private AI ai;
 
 	private Location location;
 	private int ENERGY = 1; // energy is either 1 or 0 (virus is only alive or
-						// dead)
+						    // dead)
 	private int MOVING_RANGE = 1; // always 1 regardless of virus
 
 	protected void setContagiousRange(int range) {
