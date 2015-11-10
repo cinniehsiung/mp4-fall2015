@@ -5,9 +5,9 @@ import javax.swing.ImageIcon;
 import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.Util;
 
-public class Hovercraft extends AbstractArenaVehicle{
+public class LawnMower extends AbstractArenaVehicle {
 
-    private static final ImageIcon HovercraftImage = Util.loadImage("unknown.gif"); // TO
+    private static final ImageIcon LawnMowerImage = Util.loadImage("tiger.gif"); // TO
 
     
     /**
@@ -18,25 +18,25 @@ public class Hovercraft extends AbstractArenaVehicle{
      *            the location where the Hovercraft will be created
      */
 
-    public Hovercraft(Location initialLocation) {
-        setSTRENGTH(100);        
+    public LawnMower(Location initialLocation) {
+        setSTRENGTH(2);  //very low strength b/c lawn mower       
         setVIEW_RANGE(5);
-        setINITIAL_COOLDOWN(20); //really slow initially
-        setTURNING_SPEED(15); //needs slow speed to turn 
+        setINITIAL_COOLDOWN(4); 
+        setTURNING_SPEED(2); // can turn at fast speeds
         setcurrentDirection(Util.getRandomDirection());
         setLocation(initialLocation);
 
-        setSPEED_RATE(1); //speeds up and slows down slowly
+        setSPEED_RATE(5); //speeds up and slows down slowly
     }        
     
     @Override
     public ImageIcon getImage() {
-        return HovercraftImage;
+        return LawnMowerImage;
     }
 
     @Override
     public String getName() {
-        return "Hovercraft";
+        return "LawnMower";
     }
 
 

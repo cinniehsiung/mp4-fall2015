@@ -2,6 +2,7 @@ package ca.ubc.ece.cpen221.mp4.items.vehicles;
 
 import javax.swing.ImageIcon;
 
+import ca.ubc.ece.cpen221.mp4.Actor;
 import ca.ubc.ece.cpen221.mp4.Direction;
 import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.Util;
@@ -14,19 +15,20 @@ import ca.ubc.ece.cpen221.mp4.items.Grass;
 import ca.ubc.ece.cpen221.mp4.items.Item;
 import ca.ubc.ece.cpen221.mp4.items.MoveableItem;
 import ca.ubc.ece.cpen221.mp4.items.vehicles.ArenaVehicle;
+import ca.ubc.ece.cpen221.mp4.items.viruses.ArenaVirus;
 import ca.ubc.ece.cpen221.mp4.items.animals.ArenaAnimal;
 import ca.ubc.ece.cpen221.mp4.items.animals.Gnat;
 
-public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract class for implementing all vehicles
+public abstract class AbstractArenaVehicle implements ArenaVehicle {
     
     private int STRENGTH;
     private int VIEW_RANGE;
     private int INITIAL_COOLDOWN;
     private int currentCooldown;
-    private ImageIcon image;
     private boolean isDead;
     private int TURNING_SPEED;
-    private int energy;
+    private int energy = Integer.MAX_VALUE; //arbitrary energy, vehicles do not gain/lose energy
+    private int SPEED_RATE;
     
     private Direction currentDirection;    
     private Location location;
@@ -50,8 +52,8 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract c
     protected void setcurrentDirection(Direction dir){
         this.currentDirection = dir;
     }
-    protected void setENERGY(int i){
-        this.energy = i;
+    protected void setSPEED_RATE(int i) {
+        this.SPEED_RATE = i;
     }
 
     
@@ -75,7 +77,7 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract c
             do{randomDir = Util.getRandomDirection();            
             }while(randomDir.equals(currentDirection));
             
-            return Turn(Util.getRandomDirection(), world);
+            return Turn(randomDir, world);
         }
         
         //otherwise keep going straight
@@ -93,7 +95,12 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract c
             //avoid making cooldown 0
             if(currentCooldown > 1){
                 //decrease cooldown to speed up car
-                currentCooldown--;
+                if(currentCooldown - SPEED_RATE < 0){
+                    currentCooldown = 1;
+                }
+                else{
+                    currentCooldown = currentCooldown - SPEED_RATE;
+                }
             }
             return new MoveCommand(this, goTowards);
         }
@@ -108,8 +115,9 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract c
                     //if we have more strength, destroy the Item and move into its space
                     if(STRENGTH > currentItem.getStrength()){
                         currentItem.loseEnergy(Integer.MAX_VALUE);
-                        currentCooldown++;
-                        return new MoveCommand(this, goTowards);
+                        //slow down after crashing
+                        currentCooldown = currentCooldown+SPEED_RATE;
+                        return new WaitCommand();
                     }
                     
                     //if not, we are destroyed
@@ -135,12 +143,12 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract c
     public Command Turn(Direction dir, World world){
         
         //if our current cooldown (speed) is less than the required turning speed, turn
-        if(currentCooldown < TURNING_SPEED && Util.isLocationEmpty(world, new Location(location, dir))){
+        if(currentCooldown > TURNING_SPEED && Util.isLocationEmpty(world, new Location(location, dir))){
             this.currentDirection = dir;
             return new MoveCommand(this,new Location(location, dir));
         }
         //if there is something in the way, we will crash into it
-        else if(currentCooldown < TURNING_SPEED){
+        else if(currentCooldown > TURNING_SPEED){
             
             //search all items immediately surrounding the vehicle
             for(Item currentItem : world.searchSurroundings(location, 1)){
@@ -152,7 +160,7 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract c
                     if(STRENGTH > currentItem.getStrength()){
                         currentItem.loseEnergy(Integer.MAX_VALUE);
                         this.currentDirection = dir;
-                        return new MoveCommand(this, new Location(location, dir));
+                        return new WaitCommand();
                     }
                     
                     //if not, we are destroyed
@@ -167,7 +175,7 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract c
                
         //if not, then slow down (increase cooldown)
         else{
-            currentCooldown++;
+            currentCooldown = currentCooldown + SPEED_RATE;
             return new WaitCommand();
         }
         
@@ -183,21 +191,37 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle{ //abstract c
 
     @Override
     public Location getLocation(){
-        return location;
-        
+        return location;        
     }
 
     @Override
     public int getStrength(){
-        return STRENGTH;
-        
+        return STRENGTH;        
     }
     
     @Override
     
     public boolean isDead(){
-        return isDead;
-        
+        return isDead;       
     }
 
+
+    @Override
+    public void loseEnergy(int energy) {
+        //does nothing, a vehicle cannot lose energy
+    }
+
+    @Override
+    public int getPlantCalories() {
+        //vehicles are not plants
+        return 0;
+    }
+
+    @Override
+    public int getMeatCalories() {
+        //vehicles are not animals
+        return 0;
+    }
+
+    
 }

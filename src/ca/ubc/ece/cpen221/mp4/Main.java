@@ -6,6 +6,9 @@ import ca.ubc.ece.cpen221.mp4.ai.*;
 import ca.ubc.ece.cpen221.mp4.items.Gardener;
 import ca.ubc.ece.cpen221.mp4.items.Grass;
 import ca.ubc.ece.cpen221.mp4.items.animals.*;
+import ca.ubc.ece.cpen221.mp4.items.vehicles.Helicopter;
+import ca.ubc.ece.cpen221.mp4.items.vehicles.Hovercraft;
+import ca.ubc.ece.cpen221.mp4.items.vehicles.LawnMower;
 import ca.ubc.ece.cpen221.mp4.items.viruses.BlackPlague;
 import ca.ubc.ece.cpen221.mp4.staff.WorldImpl;
 import ca.ubc.ece.cpen221.mp4.staff.WorldUI;
@@ -66,7 +69,12 @@ public class Main {
 		addSabreToothTiger(world);
 		addPenguin(world);
 		addBlackPlague(world);
-		
+	    
+	    addHelicopter(world);
+	    addHovercraft(world);
+	    addLawnMower(world);
+
+	    
 		
 		// TODO: You may add your own creatures here!
 	}
@@ -139,6 +147,33 @@ public class Main {
             BlackPlague blackplague = new BlackPlague(loc);
             world.addItem(blackplague);
             world.addActor(blackplague);
+        }
+    }
+	
+	private void addHelicopter(World world) {
+        for (int i = 0; i < 5; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            Helicopter heli = new Helicopter(loc);
+            world.addItem(heli);
+            world.addActor(heli);
+        }
+    }
+	
+	private void addHovercraft(World world) {
+        for (int i = 0; i < 5; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            Hovercraft hovercraft = new Hovercraft(loc);
+            world.addItem(hovercraft);
+            world.addActor(hovercraft);
+        }
+    }
+	
+	private void addLawnMower(World world) {
+        for (int i = 0; i < 5; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            LawnMower mower = new LawnMower(loc);
+            world.addItem(mower);
+            world.addActor(mower);
         }
     }
 }

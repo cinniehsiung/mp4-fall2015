@@ -2,6 +2,7 @@ package ca.ubc.ece.cpen221.mp4.items.vehicles;
 
 import javax.swing.ImageIcon;
 
+import ca.ubc.ece.cpen221.mp4.Actor;
 import ca.ubc.ece.cpen221.mp4.Direction;
 import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.World;
@@ -17,23 +18,10 @@ import ca.ubc.ece.cpen221.mp4.items.MoveableItem;
  * Note that the speed of a Vehicle is controlled by the cool-down period.
  *  *
  */
-public interface ArenaVehicle extends MoveableItem{
+public interface ArenaVehicle extends MoveableItem, Actor {
+     Command Turn(Direction dir, World world);
+     
+     Command Accelerate(World world);
 
-   
 
-    /**
-     * Method for getting the cooldown period of a vehicle (represents its speed)
-     * @return the current cool-down period
-     */
-    int getCoolDownPeriod();
-
-    
-    /**
-     * Method for getting the next action.
-     * @param world
-     * @return
-     */
-    Command getNextAction(World world);
-    
-    
 }
