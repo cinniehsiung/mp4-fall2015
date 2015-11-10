@@ -21,7 +21,7 @@ public abstract class InfectableArenaAnimalAI extends ArenaAnimalAI {
 	}
 
 	final private int BLACK_PLAGUE_DAMAGE = 20;
-	final private int CATARACTS_REACH = 0; // (int) Math.random()*10;
+	public final int CATARACTS_REACH = -1; // (int) Math.random()*10;
 
 	@Override
 	public abstract Command getNextAction(ArenaWorld world, ArenaAnimal animal);

@@ -25,10 +25,10 @@ public class PenguinAI extends InfectableArenaAnimalAI {
 		InfectableArenaAnimal infectableAnimal = (InfectableArenaAnimal) animal;
 		if (infectableAnimal.isInfected()) {
 			doInfectedActions(world, (InfectableArenaAnimal) animal);
-		}
-		
-		if(world.searchSurroundings(animal).isEmpty()){
-			return new WaitCommand();
+			
+			if(animal.getViewRange() == CATARACTS_REACH){
+				return new WaitCommand();
+			}
 		}
 		
 		// if there is grass / gnats next to the Penguin, it will eat it

@@ -22,10 +22,14 @@ public class MooseAI extends InfectableArenaAnimalAI {
 
 	@Override
 	public Command getNextAction(ArenaWorld world, ArenaAnimal animal) {
-		//if the animal is infected, have the virus do stuff
+		// if the animal is infected, have the virus do stuff
 		InfectableArenaAnimal infectableAnimal = (InfectableArenaAnimal) animal;
 		if (infectableAnimal.isInfected()) {
 			doInfectedActions(world, (InfectableArenaAnimal) animal);
+
+			if (animal.getViewRange() == CATARACTS_REACH) {
+				return new WaitCommand();
+			}
 		}
 
 		// if there is grass next to it, it will eat it - otherwise hurt all
@@ -40,7 +44,7 @@ public class MooseAI extends InfectableArenaAnimalAI {
 				currentItem.loseEnergy(100);
 			}
 		}
-		
+
 		Location randomAdjLoc = Util.getRandomEmptyAdjacentLocation((World) world, animal.getLocation());
 		// if nothing to eat, and we have sufficient energy, breed
 		if (animal.getEnergy() > animal.getMinimumBreedingEnergy() && randomAdjLoc != null) {

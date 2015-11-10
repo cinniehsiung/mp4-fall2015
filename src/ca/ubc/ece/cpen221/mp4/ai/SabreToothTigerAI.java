@@ -26,6 +26,10 @@ public class SabreToothTigerAI extends InfectableArenaAnimalAI {
 		InfectableArenaAnimal infectableAnimal = (InfectableArenaAnimal) animal;
 		if (infectableAnimal.isInfected()) {
 			doInfectedActions(world, (InfectableArenaAnimal) animal);
+			
+			if(animal.getViewRange() == CATARACTS_REACH){
+				return new WaitCommand();
+			}
 		}
 
 		// if there is any ArenaAnimal next to the STT, it will eat it
