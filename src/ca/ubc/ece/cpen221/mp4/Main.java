@@ -44,6 +44,7 @@ public class Main {
 	static final int INITIAL_SABRETOOTHTIGERS = INITIAL_GRASS / 50;
 	static final int INITIAL_PENGUINS = INITIAL_GRASS / 35;
 	static final int INITIAL_VIRUS = 5;
+	static final int INITIAL_VEHICLES = 3;
  
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
@@ -61,8 +62,8 @@ public class Main {
 	}
 
 	public void initialize(World world) {
-		//addGrass(world);
-		//world.addActor(new Gardener());
+		addGrass(world);
+		world.addActor(new Gardener());
 
 		addGnats(world);
 		addRabbits(world);
@@ -180,7 +181,7 @@ public class Main {
     }
 	
 	private void addHelicopter(World world) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < INITIAL_VEHICLES; i++) {
             Location loc = Util.getRandomEmptyLocation(world);
             Helicopter heli = new Helicopter(loc);
             world.addItem(heli);
@@ -189,7 +190,7 @@ public class Main {
     }
 	
 	private void addHovercraft(World world) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < INITIAL_VEHICLES; i++) {
             Location loc = Util.getRandomEmptyLocation(world);
             Hovercraft hovercraft = new Hovercraft(loc);
             world.addItem(hovercraft);
@@ -198,7 +199,7 @@ public class Main {
     }
 	
 	private void addLawnMower(World world) {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < INITIAL_VEHICLES; i++) {
             Location loc = Util.getRandomEmptyLocation(world);
             LawnMower mower = new LawnMower(loc);
             world.addItem(mower);

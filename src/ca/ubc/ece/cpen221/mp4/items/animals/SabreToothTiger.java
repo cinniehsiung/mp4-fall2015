@@ -21,6 +21,13 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
  * {@link ArenaAnimal}s
  */
 public class SabreToothTiger extends InfectableArenaAnimal {
+    private final int INITIAL_ENERGY = 180;
+    private final int MAX_ENERGY = 200;
+    private final int STRENGTH = 150;
+    private final int VIEW_RANGE = 2;
+    private final int MIN_BREEDING_ENERGY = 150;
+    private final int COOLDOWN = 2;
+    
 	private final AI ai;
 	private static final ImageIcon STTImage = Util.loadImage("sabretoothtiger.gif"); // TO
 																			// CHANGE
@@ -33,17 +40,15 @@ public class SabreToothTiger extends InfectableArenaAnimal {
 	 *            the location where the STT will be created
 	 */
 	public SabreToothTiger(AI sabertoothtigerAI, Location initialLocation) {
-		setINITIAL_ENERGY(150);
-		setEnergy(150);
+		setEnergy(INITIAL_ENERGY);
+		setMAX_ENERGY(MAX_ENERGY);
+		setSTRENGTH(STRENGTH);
+		setVIEW_RANGE(VIEW_RANGE);
+		setINITIAL_VIEW_RANGE(VIEW_RANGE);
+		setMIN_BREEDING_ENERGY(MIN_BREEDING_ENERGY);
+		setCOOLDOWN(COOLDOWN);
 
-		setMAX_ENERGY(200);
-		setSTRENGTH(150);
-		setVIEW_RANGE(2);
-		setINITIAL_VIEW_RANGE(2);
-		setMIN_BREEDING_ENERGY(150);
-		setCOOLDOWN(2);
 		setLocation(initialLocation);
-		
 		this.healVirus();
 		ai = sabertoothtigerAI;
 

@@ -8,8 +8,21 @@ import ca.ubc.ece.cpen221.mp4.Util;
 import ca.ubc.ece.cpen221.mp4.ai.AI;
 import ca.ubc.ece.cpen221.mp4.items.viruses.AbstractArenaVirus;
 
+/**
+ * A Helicopter is an {@link ArenaVehicle} that is able to move quickly and turn at high speeds. It also accelerates at a moderate
+ * rate.   
+ *
+ */
 public class Helicopter extends AbstractArenaVehicle {
+    
+    private final int STRENGTH = 80;
+    private final int INITIAL_COOLDOWN = 5;
+    private final int TURNING_SPEED = 5;
+    private final int SPEED_RATE = 2;
 
+   
+    
+    
     private static final ImageIcon HelicopterImage = Util.loadImage("helicopter.gif"); // TO
 
     
@@ -22,14 +35,13 @@ public class Helicopter extends AbstractArenaVehicle {
      */
 
     public Helicopter(Location initialLocation) {
-        setSTRENGTH(80);        
-        setVIEW_RANGE(8);
-        setINITIAL_COOLDOWN(5);
-        setTURNING_SPEED(5);
+        setSTRENGTH(STRENGTH);         
+        setINITIAL_COOLDOWN(INITIAL_COOLDOWN);
+        setTURNING_SPEED(TURNING_SPEED);
         setcurrentDirection(Util.getRandomDirection());
         setLocation(initialLocation);
-
-        setSPEED_RATE(2);
+        //rate at which the Helicopter will accelerate/decelerate 
+        setSPEED_RATE(SPEED_RATE);
     }        
     
     @Override
