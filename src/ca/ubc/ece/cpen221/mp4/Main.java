@@ -74,9 +74,9 @@ public class Main {
 		addPenguin(world);
 		
 		//our ArenaViruses
-		//addBlackPlague(world);
+		addBlackPlague(world);
 	    addCataracts(world);
-	   // addPanacea(world);
+	    addPanacea(world);
 	    
 	    //our ArenaVehicles
 	    addHelicopter(world);

@@ -39,6 +39,7 @@ public class SabreToothTiger extends InfectableArenaAnimal {
 		setMAX_ENERGY(200);
 		setSTRENGTH(150);
 		setVIEW_RANGE(2);
+		setINITIAL_VIEW_RANGE(2);
 		setMIN_BREEDING_ENERGY(150);
 		setCOOLDOWN(2);
 		setLocation(initialLocation);

@@ -17,10 +17,10 @@ public abstract class AbstractArenaAnimal implements ArenaAnimal {
 	private int MAX_ENERGY;
 	private int STRENGTH;
 	private int VIEW_RANGE;
+	private int INITIAL_VIEW_RANGE;
 	private int MIN_BREEDING_ENERGY;
 	private int COOLDOWN;
 	private ImageIcon image;
-	private boolean isDead;
 
 	private Location location;
 	private int energy = INITIAL_ENERGY;
@@ -49,6 +49,10 @@ public abstract class AbstractArenaAnimal implements ArenaAnimal {
 		this.STRENGTH = i;
 	}
 
+	protected void setINITIAL_VIEW_RANGE(int i){
+		this.INITIAL_VIEW_RANGE = i;
+	}
+	
 	public void setVIEW_RANGE(int i) {
 		this.VIEW_RANGE = i;
 	}
@@ -124,6 +128,10 @@ public abstract class AbstractArenaAnimal implements ArenaAnimal {
 	@Override
 	public int getViewRange() {
 		return VIEW_RANGE;
+	}
+	
+	public int getInitialViewRange(){
+		return INITIAL_VIEW_RANGE;
 	}
 
 	@Override

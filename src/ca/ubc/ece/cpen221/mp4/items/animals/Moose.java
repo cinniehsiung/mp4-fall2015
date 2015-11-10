@@ -40,6 +40,7 @@ public class Moose extends InfectableArenaAnimal{
         setMAX_ENERGY(200);
         setSTRENGTH(180);
         setVIEW_RANGE(7);
+        setINITIAL_VIEW_RANGE(7);
         setMIN_BREEDING_ENERGY(120);
         setCOOLDOWN(5);
 

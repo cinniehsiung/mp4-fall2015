@@ -18,8 +18,13 @@ import ca.ubc.ece.cpen221.mp4.items.animals.*;
 
 public class AbstractAI implements AI {
 
-	public Direction oppositeDir(Direction dir) { // returns opposite direction
-													// of direction dir
+	/**
+	 * returns opposite direction of direction dir
+	 * 
+	 * @param dir
+	 * @return opposite direction
+	 */
+	public Direction oppositeDir(Direction dir) {
 		if (dir == Direction.EAST) {
 			return Direction.WEST;
 		} else if (dir == Direction.WEST) {
@@ -31,12 +36,18 @@ public class AbstractAI implements AI {
 		}
 	}
 
-	public boolean isLocationEmpty(ArenaWorld world, ArenaAnimal animal, Location location) { // returns
-																								// true
-																								// if
-																								// location
-																								// is
-																								// empty
+	/**
+	 * returns true if the location is empty
+	 * 
+	 * @param world
+	 *            the world with the location
+	 * @param animal
+	 *            the animal
+	 * @param location
+	 *            the location
+	 * @return true if the location is empty, false otherwise
+	 */
+	public boolean isLocationEmpty(ArenaWorld world, ArenaAnimal animal, Location location) {
 		if (!Util.isValidLocation(world, location)) {
 			return false;
 		}

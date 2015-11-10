@@ -18,12 +18,19 @@ import ca.ubc.ece.cpen221.mp4.items.*;
 import ca.ubc.ece.cpen221.mp4.items.animals.*;
 
 public class ArenaAnimalAI implements AI {
-	private int energy;
-	
+
 	public ArenaAnimalAI() {
-		//empty constructor
+		// empty constructor, should be overwritten by individual animals
 	}
 
+	/**
+	 * returns true if the location is empty
+	 * 
+	 * @param world
+	 * @param animal
+	 * @param location
+	 * @return true if the location is empty, false otherwise
+	 */
 	public boolean isLocationEmpty(ArenaWorld world, ArenaAnimal animal, Location location) {
 		if (!Util.isValidLocation(world, location)) {
 			return false;

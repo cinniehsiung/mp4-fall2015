@@ -43,6 +43,7 @@ public abstract class InfectableArenaAnimal extends AbstractArenaAnimal {
 	public void healVirus() {
 		this.virusStatus = "";
 		this.virusLifeSpan = 0;
+		this.setVIEW_RANGE(this.getInitialViewRange());
 	}
 
 	@Override

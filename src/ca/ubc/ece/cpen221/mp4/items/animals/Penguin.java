@@ -43,6 +43,7 @@ public class Penguin extends InfectableArenaAnimal {
 		setMAX_ENERGY(150);
 		setSTRENGTH(80);
 		setVIEW_RANGE(8);
+		setINITIAL_VIEW_RANGE(8);
 		setMIN_BREEDING_ENERGY(40);
 		setCOOLDOWN(2);
 		setLocation(initialLocation);

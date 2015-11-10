@@ -1,7 +1,5 @@
 package ca.ubc.ece.cpen221.mp4.ai;
 
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -16,10 +14,7 @@ import ca.ubc.ece.cpen221.mp4.commands.EatCommand;
 import ca.ubc.ece.cpen221.mp4.commands.MoveCommand;
 import ca.ubc.ece.cpen221.mp4.commands.WaitCommand;
 import ca.ubc.ece.cpen221.mp4.items.Item;
-import ca.ubc.ece.cpen221.mp4.items.LivingItem;
 import ca.ubc.ece.cpen221.mp4.items.animals.*;
-import ca.ubc.ece.cpen221.mp4.staff.WorldImpl;
-import ca.ubc.ece.cpen221.mp4.staff.WorldUI;
 
 /**
  * Your Fox AI.
