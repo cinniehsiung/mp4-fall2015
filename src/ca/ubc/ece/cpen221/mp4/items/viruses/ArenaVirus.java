@@ -1,12 +1,8 @@
 package ca.ubc.ece.cpen221.mp4.items.viruses;
 
 import ca.ubc.ece.cpen221.mp4.Actor;
-import ca.ubc.ece.cpen221.mp4.World;
-import ca.ubc.ece.cpen221.mp4.commands.Command;
-import ca.ubc.ece.cpen221.mp4.items.LivingItem;
 import ca.ubc.ece.cpen221.mp4.items.MoveableItem;
 import ca.ubc.ece.cpen221.mp4.items.animals.InfectableArenaAnimal;
-import ca.ubc.ece.cpen221.mp4.items.animals.ArenaAnimal;
 
 public interface ArenaVirus extends MoveableItem, Actor {
 

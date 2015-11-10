@@ -6,14 +6,18 @@ import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.Util;
 import ca.ubc.ece.cpen221.mp4.items.animals.InfectableArenaAnimal;
 
+/**
+ * A {@link Cataracts} is an {@link ArenaVirus} that infects {@link ArenaAnimals} and causes them to be immobile for 3 times
+ * that the ArenaAnimal calls the getNextAction method after the initial infection. Cataracts has a infection time of 3 steps, 
+ * and a range of 10. 
+ *
+ */
 public class Cataracts extends AbstractArenaVirus {
 	private static final int CONTAGIOUS_RANGE = 10;
 	private static final int INFECTION_TIME = 3;
 	private static final ImageIcon IMAGE = Util.loadImage("cataracts.gif");
 	private static final String VIRUS_NAME = "Cataracts";
 
-	private Location location;
-	private int energy = 1;
 
 	/**
 	 * Create a new BlackPlague at <code>initialLocation</code>. The
