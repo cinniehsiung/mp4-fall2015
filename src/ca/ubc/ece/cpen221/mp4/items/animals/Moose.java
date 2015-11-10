@@ -22,6 +22,14 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
  */
 
 public class Moose extends InfectableArenaAnimal{
+    
+    private final int INITIAL_ENERGY = 150;
+    private final int MAX_ENERGY = 200;
+    private final int STRENGTH = 180;
+    private final int VIEW_RANGE = 7;
+    private final int MIN_BREEDING_ENERGY = 120;
+    private final int COOLDOWN = 5;
+    
 	private final AI ai;
     private static final ImageIcon mooseImage = Util.loadImage("Moose.gif"); //TO CHANGE
     
@@ -34,14 +42,13 @@ public class Moose extends InfectableArenaAnimal{
      *            the location where the Moose will be created
      */
     public Moose(AI mooseAI, Location initialLocation) {
-        setINITIAL_ENERGY(150);
-        setEnergy(150);
+        setEnergy(INITIAL_ENERGY);
         
-        setMAX_ENERGY(200);
-        setSTRENGTH(180);
-        setVIEW_RANGE(7);
-        setMIN_BREEDING_ENERGY(120);
-        setCOOLDOWN(5);
+        setMAX_ENERGY(MAX_ENERGY);
+        setSTRENGTH(STRENGTH);
+        setVIEW_RANGE(VIEW_RANGE);
+        setMIN_BREEDING_ENERGY(MIN_BREEDING_ENERGY);
+        setCOOLDOWN(COOLDOWN);
 
         setLocation(initialLocation);
         
