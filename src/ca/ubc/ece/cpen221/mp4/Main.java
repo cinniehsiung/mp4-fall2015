@@ -64,19 +64,24 @@ public class Main {
 		//addGrass(world);
 		//world.addActor(new Gardener());
 
-		//addGnats(world);
-		//addRabbits(world);
-		//addFoxes(world);
-		//addMoose(world);
-		//addSabreToothTiger(world);
+		addGnats(world);
+		addRabbits(world);
+		addFoxes(world);
+		
+		//our ArenaAnimals
+		addMoose(world);
+		addSabreToothTiger(world);
 		addPenguin(world);
-		//addBlackPlague(world);
-		//addCataracts(world);
-		addPanacea(world);
+		
+		//our ArenaViruses
+		addBlackPlague(world);
+	    addCataracts(world);
+	    addPanacea(world);
 	    
-	    //addHelicopter(world);
-	    //addHovercraft(world);
-	    //addLawnMower(world);
+	    //our ArenaVehicles
+	    addHelicopter(world);
+	    addHovercraft(world);
+	    addLawnMower(world);
 
 	    
 		
@@ -155,13 +160,13 @@ public class Main {
             world.addActor(blackplague);
         }
     }
-	
+
 	private void addCataracts(World world) {
         for (int i = 0; i < INITIAL_VIRUS; i++) {
             Location loc = Util.getRandomEmptyLocation(world);
-            Cataracts cataract = new Cataracts(loc);
-            world.addItem(cataract);
-            world.addActor(cataract);
+            Cataracts cataracts = new Cataracts(loc);
+            world.addItem(cataracts);
+            world.addActor(cataracts);
         }
     }
 	

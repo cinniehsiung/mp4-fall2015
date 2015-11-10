@@ -22,7 +22,7 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
  */
 public class SabreToothTiger extends InfectableArenaAnimal {
 	private final AI ai;
-	private static final ImageIcon STTImage = Util.loadImage("bulba.gif"); // TO
+	private static final ImageIcon STTImage = Util.loadImage("sabretoothtiger.gif"); // TO
 																			// CHANGE
 
 	/**

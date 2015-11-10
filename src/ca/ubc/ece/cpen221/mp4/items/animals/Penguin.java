@@ -25,7 +25,7 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
  */
 public class Penguin extends InfectableArenaAnimal {
 	private final AI ai;
-	private static final ImageIcon PenguinImage = Util.loadImage("woman.gif"); // TO
+	private static final ImageIcon PenguinImage = Util.loadImage("penguin.gif"); // TO
 																				// CHANGE
 
 	/**

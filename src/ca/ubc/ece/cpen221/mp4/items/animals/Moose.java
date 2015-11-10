@@ -23,7 +23,7 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
 
 public class Moose extends InfectableArenaAnimal{
 	private final AI ai;
-    private static final ImageIcon mooseImage = Util.loadImage("hunter.gif"); //TO CHANGE
+    private static final ImageIcon mooseImage = Util.loadImage("Moose.gif"); //TO CHANGE
     
     
     /**
