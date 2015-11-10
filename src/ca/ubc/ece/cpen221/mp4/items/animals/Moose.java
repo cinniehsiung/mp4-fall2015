@@ -22,7 +22,7 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
  */
 
 public class Moose extends InfectableArenaAnimal{
-        
+	private final AI ai;
     private static final ImageIcon mooseImage = Util.loadImage("hunter.gif"); //TO CHANGE
     
     
@@ -33,7 +33,7 @@ public class Moose extends InfectableArenaAnimal{
      * @param initialLocation
      *            the location where the Moose will be created
      */
-    public Moose(Location initialLocation) {
+    public Moose(AI mooseAI, Location initialLocation) {
         setINITIAL_ENERGY(150);
         setEnergy(150);
         
@@ -45,57 +45,29 @@ public class Moose extends InfectableArenaAnimal{
 
         setLocation(initialLocation);
         
-        
+        this.healVirus();
+        this.ai = mooseAI;
     }
 
     @Override
     public LivingItem breed() {
-        Moose child = new Moose(this.getLocation());
+        Moose child = new Moose(ai, this.getLocation());
         child.setEnergy(this.getEnergy()/ 2);
         setEnergy(this.getEnergy() / 2);
         return child;
     }
-
+    
+    @Override
+	public Command getNextAction(World world) {
+		Command nextAction = ai.getNextAction(world, this);
+		setEnergy(this.getEnergy() - 1); // Loses 1 energy regardless of action.
+		return nextAction;
+	}
 
     @Override
     public String getName() {
         return "Moose";
     }
-
-    @Override
-    public Command getNextAction(World world) {
-        //if there is grass next to it, it will eat it - otherwise hurt all other weaker ArenaAnimals within 1 space of it
-        for(Item currentItem : world.searchSurroundings(this)){
-            if(currentItem.getPlantCalories() > 0 && currentItem.getLocation().getDistance(this.getLocation()) == 1){
-              return new EatCommand(this, currentItem);
-            } 
-            else if(currentItem.getMeatCalories() > 0 && currentItem.getLocation().getDistance(this.getLocation()) == 1 && currentItem.getStrength() < this.getStrength()){
-                currentItem.loseEnergy(100);
-            }
-        }
-        //if nothing to eat, and we have sufficient energy, breed
-        if(this.getEnergy() > this.getMinimumBreedingEnergy()){
-            return new BreedCommand(this, Util.getRandomEmptyAdjacentLocation(world, this.getLocation()));
-        }
-        
-        int count = 0;
-        //otherwise move to a random location       
-        Location targetLocation;
-        do{
-            targetLocation = Util.getRandomEmptyAdjacentLocation(world, this.getLocation());
-            if(targetLocation == null){
-                return new WaitCommand();
-            }
-            count++;
-        }while(targetLocation.getDistance(this.getLocation()) > 1 && count < 4);  
-        
-        if (Util.isValidLocation(world, targetLocation) && Util.isLocationEmpty(world, targetLocation) && count < 4) {
-            return new MoveCommand(this, targetLocation);
-        }
-
-        return new WaitCommand();        
-    }
-
 
     @Override
     public ImageIcon getImage() {

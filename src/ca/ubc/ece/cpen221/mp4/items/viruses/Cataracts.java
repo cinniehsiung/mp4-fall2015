@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 
 import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.Util;
+import ca.ubc.ece.cpen221.mp4.items.animals.InfectableArenaAnimal;
 
 public class Cataracts extends AbstractArenaVirus {
 	private static final int CONTAGIOUS_RANGE = 1;
@@ -35,6 +36,11 @@ public class Cataracts extends AbstractArenaVirus {
 
 	public ImageIcon getImage() {
 		return IMAGE;
+	}
+	
+	@Override
+	public void infectAnimal(InfectableArenaAnimal animal) {
+		animal.infectAnimal(this);	
 	}
 
 }

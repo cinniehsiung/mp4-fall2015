@@ -9,10 +9,11 @@ import ca.ubc.ece.cpen221.mp4.ai.AI;
 import ca.ubc.ece.cpen221.mp4.items.MoveableItem;
 import ca.ubc.ece.cpen221.mp4.items.animals.ArenaAnimal;
 import ca.ubc.ece.cpen221.mp4.items.animals.Fox;
+import ca.ubc.ece.cpen221.mp4.items.animals.InfectableArenaAnimal;
 
 public class BlackPlague extends AbstractArenaVirus {
 
-	private static final int CONTAGIOUS_RANGE = 3;
+	private static final int CONTAGIOUS_RANGE = 10;
 	private static final int INFECTION_TIME = 5;
 	private static final ImageIcon IMAGE = Util.loadImage("unknown.gif");
 	private static final String VIRUS_NAME = "BlackPlague";
@@ -42,5 +43,11 @@ public class BlackPlague extends AbstractArenaVirus {
 	
 	public ImageIcon getImage() {
 		return IMAGE;
+	}
+
+
+	@Override
+	public void infectAnimal(InfectableArenaAnimal animal) {
+		animal.infectAnimal(this);	
 	}
 }
