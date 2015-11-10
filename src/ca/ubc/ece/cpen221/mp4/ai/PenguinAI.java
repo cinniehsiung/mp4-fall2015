@@ -23,8 +23,12 @@ public class PenguinAI extends InfectableArenaAnimalAI {
 	@Override
 	public Command getNextAction(ArenaWorld world, ArenaAnimal animal) {
 		InfectableArenaAnimal infectableAnimal = (InfectableArenaAnimal) animal;
-		if(infectableAnimal.isInfected()){
+		if (infectableAnimal.isInfected()) {
 			doInfectedActions(world, (InfectableArenaAnimal) animal);
+		}
+		
+		if(world.searchSurroundings(animal).isEmpty()){
+			return new WaitCommand();
 		}
 		
 		// if there is grass / gnats next to the Penguin, it will eat it
@@ -47,6 +51,7 @@ public class PenguinAI extends InfectableArenaAnimalAI {
 			}
 		}
 
+		
 		// if nothing to eat or escape from, and we have sufficient energy,
 		// breed
 		if (animal.getEnergy() > animal.getMinimumBreedingEnergy()) {

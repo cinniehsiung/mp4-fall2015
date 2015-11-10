@@ -20,8 +20,8 @@ public abstract class InfectableArenaAnimalAI extends ArenaAnimalAI {
 		// TODO Auto-generated constructor stub
 	}
 
-	final private int BLACK_PLAGUE_DAMAGE = 1000;
-	final private int CATARACTS_REACH = 10; // (int) Math.random()*10;
+	final private int BLACK_PLAGUE_DAMAGE = 20;
+	final private int CATARACTS_REACH = 0; // (int) Math.random()*10;
 
 	@Override
 	public abstract Command getNextAction(ArenaWorld world, ArenaAnimal animal);
@@ -30,7 +30,7 @@ public abstract class InfectableArenaAnimalAI extends ArenaAnimalAI {
 		String virusStatus = animal.getVirus();
 
 		if ("BlackPlague".equals(virusStatus)) {
-			animal.loseEnergy(Integer.MAX_VALUE);
+			animal.loseEnergy(BLACK_PLAGUE_DAMAGE);
 		}
 
 		if ("Cataracts".equals(virusStatus)) {

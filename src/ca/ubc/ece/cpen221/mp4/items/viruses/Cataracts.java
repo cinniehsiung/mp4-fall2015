@@ -7,8 +7,8 @@ import ca.ubc.ece.cpen221.mp4.Util;
 import ca.ubc.ece.cpen221.mp4.items.animals.InfectableArenaAnimal;
 
 public class Cataracts extends AbstractArenaVirus {
-	private static final int CONTAGIOUS_RANGE = 1;
-	private static final int INFECTION_TIME = 10;
+	private static final int CONTAGIOUS_RANGE = 15;
+	private static final int INFECTION_TIME = 3;
 	private static final ImageIcon IMAGE = Util.loadImage("unknown.gif");
 	private static final String VIRUS_NAME = "Cataracts";
 
