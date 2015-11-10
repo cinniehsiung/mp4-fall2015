@@ -37,7 +37,7 @@ public abstract class InfectableArenaAnimal extends AbstractArenaAnimal {
 	}
 
 	public boolean isInfected() {
-		return "".equals(virusStatus);
+		return !"".equals(virusStatus);
 	}
 
 	public void healVirus() {

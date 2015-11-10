@@ -62,17 +62,17 @@ public class Main {
 		addGrass(world);
 		world.addActor(new Gardener());
 
-		addGnats(world);
-		addRabbits(world);
-		addFoxes(world);
+		//addGnats(world);
+		//addRabbits(world);
+		//addFoxes(world);
 		addMoose(world);
 		addSabreToothTiger(world);
 		addPenguin(world);
 		addBlackPlague(world);
 	    
-	    addHelicopter(world);
-	    addHovercraft(world);
-	    addLawnMower(world);
+	    //addHelicopter(world);
+	    //addHovercraft(world);
+	    //addLawnMower(world);
 
 	    
 		
