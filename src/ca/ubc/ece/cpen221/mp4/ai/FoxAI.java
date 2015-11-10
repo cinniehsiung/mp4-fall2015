@@ -76,8 +76,9 @@ public class FoxAI extends AbstractAI {
 			}
 		}
 
-		if (ENERGY > BREEDING_ENERGY) {
-			return new BreedCommand(animal, Util.getRandomEmptyAdjacentLocation((World) world, CURRENT_LOCATION));
+		Location randomAdjLoc = Util.getRandomEmptyAdjacentLocation((World) world, CURRENT_LOCATION);
+		if (ENERGY > BREEDING_ENERGY && randomAdjLoc != null) {
+			return new BreedCommand(animal, randomAdjLoc);
 		}
 
 		Command move = moveFromEdge(CURRENT_LOCATION.getX(), CURRENT_LOCATION.getY(), world, animal, CURRENT_LOCATION);

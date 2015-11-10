@@ -19,22 +19,22 @@ import ca.ubc.ece.cpen221.mp4.items.viruses.ArenaVirus;
 import ca.ubc.ece.cpen221.mp4.items.animals.ArenaAnimal;
 import ca.ubc.ece.cpen221.mp4.items.animals.Gnat;
 
-public abstract class AbstractArenaVehicle implements ArenaVehicle {
+public abstract class AbstractArenaVehicle implements ArenaVehicle {  //abstract class for all ArenaVehicles
     
-    //Constants for each Vehicle 
+    //Constants for each ArenaVehicle 
     private int STRENGTH;
     private int VIEW_RANGE;
     private int INITIAL_COOLDOWN;
-    private int currentCooldown;
     private boolean isDead;
     private int TURNING_SPEED;
-    //private int energy = Integer.MAX_VALUE; //arbitrary energy, vehicles do not gain/lose energy
     private int SPEED_RATE;
     
+    
+    private int currentCooldown;
     private Direction currentDirection;    
     private Location location;
     
-    
+    //Protected methods for setting the constants for each ArenaVehicle
     protected void setSTRENGTH(int i) {
         this.STRENGTH = i;
     }
@@ -68,6 +68,14 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle {
         return 1; //can only move one space each step
     }
     
+    /**
+     * Method to control the next action of each ArenaVehicle. If the ArenaVehicle is at an edge of the World,
+     * it will turn. Otherwise, it will continue in the same direction.
+     * 
+     * @param World world
+     *          The World
+     * 
+     */
     @Override
     public Command getNextAction(World world) {
         Direction randomDir;
@@ -124,7 +132,6 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle {
                     //if not, we are destroyed
                     else{
                         this.isDead = true;
-                        //this.energy = 0;
                         return new WaitCommand();
                     }
                 }
@@ -167,7 +174,6 @@ public abstract class AbstractArenaVehicle implements ArenaVehicle {
                     //if not, we are destroyed
                     else{
                         this.isDead = true;
-                        //this.energy = 0;
                         return new WaitCommand();
                     }
                 }

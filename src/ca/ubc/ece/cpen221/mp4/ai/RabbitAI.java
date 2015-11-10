@@ -113,8 +113,10 @@ public class RabbitAI extends AbstractAI {
 
 		// if there is nothing around in the view range
 		// then breed if there is enough energy
-		if (CURRENT_ENERGY >= BREEDING_ENERGY) {
-			return new BreedCommand(animal, Util.getRandomEmptyAdjacentLocation((World) world, CURRENT_LOCATION));
+		
+		Location randomAdjLoc = Util.getRandomEmptyAdjacentLocation((World) world, CURRENT_LOCATION);
+		if (CURRENT_ENERGY >= BREEDING_ENERGY && randomAdjLoc != null) {
+			return new BreedCommand(animal, randomAdjLoc);
 		}
 
 		if (CURRENT_ENERGY < MAX_ENERGY / 5) {
