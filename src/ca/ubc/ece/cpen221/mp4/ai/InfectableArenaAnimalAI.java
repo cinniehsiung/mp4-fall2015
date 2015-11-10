@@ -16,12 +16,11 @@ import ca.ubc.ece.cpen221.mp4.items.animals.ArenaAnimal;
 import ca.ubc.ece.cpen221.mp4.items.animals.InfectableArenaAnimal;
 
 public abstract class InfectableArenaAnimalAI extends ArenaAnimalAI {
-	public InfectableArenaAnimalAI(int energy) {
-		super(energy);
+	public InfectableArenaAnimalAI() {
 		// TODO Auto-generated constructor stub
 	}
 
-	final private int BLACK_PLAGUE_DAMAGE = 200;
+	final private int BLACK_PLAGUE_DAMAGE = 1000;
 	final private int CATARACTS_REACH = 10; // (int) Math.random()*10;
 
 	@Override
@@ -31,7 +30,7 @@ public abstract class InfectableArenaAnimalAI extends ArenaAnimalAI {
 		String virusStatus = animal.getVirus();
 
 		if ("BlackPlague".equals(virusStatus)) {
-			animal.loseEnergy(BLACK_PLAGUE_DAMAGE);
+			animal.loseEnergy(Integer.MAX_VALUE);
 		}
 
 		if ("Cataracts".equals(virusStatus)) {

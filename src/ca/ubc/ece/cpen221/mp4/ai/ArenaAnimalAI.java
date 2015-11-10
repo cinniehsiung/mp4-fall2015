@@ -20,8 +20,8 @@ import ca.ubc.ece.cpen221.mp4.items.animals.*;
 public class ArenaAnimalAI implements AI {
 	private int energy;
 	
-	public ArenaAnimalAI(int energy) {
-		this.energy = energy;
+	public ArenaAnimalAI() {
+		//empty constructor
 	}
 
 	public boolean isLocationEmpty(ArenaWorld world, ArenaAnimal animal, Location location) {

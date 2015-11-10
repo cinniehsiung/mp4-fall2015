@@ -116,23 +116,25 @@ public class Main {
 	}
 	
 	private void addMoose(World world) {
+		MooseAI mooseAI = new MooseAI();
         for (int i = 0; i < INITIAL_MOOSE; i++) {
             Location loc = Util.getRandomEmptyLocation(world);
-            Moose moose = new Moose(loc);
+            Moose moose = new Moose(mooseAI, loc);
             world.addItem(moose);
             world.addActor(moose);
         }
     }
 	private void addSabreToothTiger(World world) {
+		SabreToothTigerAI sabretoothtigerAI = new SabreToothTigerAI();
         for (int i = 0; i < INITIAL_SABRETOOTHTIGERS; i++) {
             Location loc = Util.getRandomEmptyLocation(world);
-            SabreToothTiger STT = new SabreToothTiger(loc);
+            SabreToothTiger STT = new SabreToothTiger(sabretoothtigerAI, loc);
             world.addItem(STT);
             world.addActor(STT);
         }
     }
 	private void addPenguin(World world) {
-		PenguinAI penguinAI = new PenguinAI(10);
+		PenguinAI penguinAI = new PenguinAI();
         for (int i = 0; i < INITIAL_PENGUINS; i++) {
             Location loc = Util.getRandomEmptyLocation(world);
             Penguin penguin = new Penguin(penguinAI, loc);

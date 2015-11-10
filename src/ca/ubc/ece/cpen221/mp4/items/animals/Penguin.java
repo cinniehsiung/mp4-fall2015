@@ -48,6 +48,7 @@ public class Penguin extends InfectableArenaAnimal {
 		setLocation(initialLocation);
 
 		this.ai = penguinAI;
+		this.healVirus();
 	}
 
 	@Override
@@ -60,16 +61,15 @@ public class Penguin extends InfectableArenaAnimal {
 	}
 
 	@Override
-	public String getName() {
-		return "Penguin";
-	}
-
-	@Override
 	public Command getNextAction(World world) {
 		Command nextAction = ai.getNextAction(world, this);
-		this.setEnergy(this.getEnergy() - 1); // Loses 1 energy regardless of
-												// action.
+		setEnergy(this.getEnergy() - 1); // Loses 1 energy regardless of action.
 		return nextAction;
+	}
+	
+	@Override
+	public String getName() {
+		return "Penguin";
 	}
 
 	@Override

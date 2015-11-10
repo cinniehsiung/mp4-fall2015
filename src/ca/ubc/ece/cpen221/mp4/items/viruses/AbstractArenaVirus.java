@@ -110,9 +110,7 @@ public abstract class AbstractArenaVirus implements ArenaVirus {
 	}
 
 	@Override
-	public void infectAnimal(InfectableArenaAnimal animal) {
-		animal.infectAnimal(this);
-	}
+	public abstract void infectAnimal(InfectableArenaAnimal animal);
 
 	/**
 	 * Method for getting the next action.

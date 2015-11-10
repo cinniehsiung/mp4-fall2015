@@ -4,15 +4,16 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
 import ca.ubc.ece.cpen221.mp4.items.viruses.ArenaVirus;
 
 public abstract class InfectableArenaAnimal extends AbstractArenaAnimal {
-	private String virusStatus = "";
-	private int virusLifeSpan = 0;
+	private String virusStatus;
+	private int virusLifeSpan;
 
 	/**
 	 * 
 	 * @param virusName
 	 */
 	public void infectAnimal(ArenaVirus virus) {
-		setVirusStatus(virus);
+		this.virusStatus = virus.getName();
+		this.virusLifeSpan = virus.getInfectionTime();
 	}
 
 	/**
@@ -27,26 +28,16 @@ public abstract class InfectableArenaAnimal extends AbstractArenaAnimal {
 		return virusLifeSpan;
 	}
 
-	public void setVirusLifeSpan(int lifespan) {
-		virusLifeSpan = lifespan;
-	}
-
 	public void decreaseVirusLifeSpan() {
 		virusLifeSpan--;
 
 		if (virusLifeSpan <= 0) {
 			healVirus();
 		}
-
 	}
 
 	public boolean isInfected() {
 		return "".equals(virusStatus);
-	}
-
-	public void setVirusStatus(ArenaVirus virus) {
-		this.virusStatus = virus.getName();
-		this.virusLifeSpan = virus.getInfectionTime();
 	}
 
 	public void healVirus() {
