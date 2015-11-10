@@ -15,7 +15,7 @@ public class BlackPlague extends AbstractArenaVirus {
 
 	private static final int CONTAGIOUS_RANGE = 10;
 	private static final int INFECTION_TIME = 5;
-	private static final ImageIcon IMAGE = Util.loadImage("unknown.gif");
+	private static final ImageIcon IMAGE = Util.loadImage("blackplague.gif");
 	private static final String VIRUS_NAME = "BlackPlague";
 	
 	//private final AI ai;

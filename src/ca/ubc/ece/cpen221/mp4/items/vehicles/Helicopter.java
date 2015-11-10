@@ -10,7 +10,7 @@ import ca.ubc.ece.cpen221.mp4.items.viruses.AbstractArenaVirus;
 
 public class Helicopter extends AbstractArenaVehicle {
 
-    private static final ImageIcon HelicopterImage = Util.loadImage("man.gif"); // TO
+    private static final ImageIcon HelicopterImage = Util.loadImage("helicopter.gif"); // TO
 
     
     /**

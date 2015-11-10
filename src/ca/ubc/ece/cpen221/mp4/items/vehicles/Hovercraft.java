@@ -7,7 +7,7 @@ import ca.ubc.ece.cpen221.mp4.Util;
 
 public class Hovercraft extends AbstractArenaVehicle{
 
-    private static final ImageIcon HovercraftImage = Util.loadImage("unknown.gif"); // TO
+    private static final ImageIcon HovercraftImage = Util.loadImage("hovercraft.gif"); // TO
 
     
     /**

@@ -10,6 +10,8 @@ import ca.ubc.ece.cpen221.mp4.items.vehicles.Helicopter;
 import ca.ubc.ece.cpen221.mp4.items.vehicles.Hovercraft;
 import ca.ubc.ece.cpen221.mp4.items.vehicles.LawnMower;
 import ca.ubc.ece.cpen221.mp4.items.viruses.BlackPlague;
+import ca.ubc.ece.cpen221.mp4.items.viruses.Cataracts;
+import ca.ubc.ece.cpen221.mp4.items.viruses.Panacea;
 import ca.ubc.ece.cpen221.mp4.staff.WorldImpl;
 import ca.ubc.ece.cpen221.mp4.staff.WorldUI;
 
@@ -62,17 +64,24 @@ public class Main {
 		addGrass(world);
 		world.addActor(new Gardener());
 
-		//addGnats(world);
-		//addRabbits(world);
-		//addFoxes(world);
+		addGnats(world);
+		addRabbits(world);
+		addFoxes(world);
+		
+		//our ArenaAnimals
 		addMoose(world);
 		addSabreToothTiger(world);
 		addPenguin(world);
+		
+		//our ArenaViruses
 		addBlackPlague(world);
+	    addCataracts(world);
+	    addPanacea(world);
 	    
-	    //addHelicopter(world);
-	    //addHovercraft(world);
-	    //addLawnMower(world);
+	    //our ArenaVehicles
+	    addHelicopter(world);
+	    addHovercraft(world);
+	    addLawnMower(world);
 
 	    
 		
@@ -149,6 +158,24 @@ public class Main {
             BlackPlague blackplague = new BlackPlague(loc);
             world.addItem(blackplague);
             world.addActor(blackplague);
+        }
+    }
+
+	private void addCataracts(World world) {
+        for (int i = 0; i < INITIAL_VIRUS; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            Cataracts cataracts = new Cataracts(loc);
+            world.addItem(cataracts);
+            world.addActor(cataracts);
+        }
+    }
+	
+	private void addPanacea(World world) {
+        for (int i = 0; i < INITIAL_VIRUS; i++) {
+            Location loc = Util.getRandomEmptyLocation(world);
+            Panacea panacea = new Panacea(loc);
+            world.addItem(panacea);
+            world.addActor(panacea);
         }
     }
 	
