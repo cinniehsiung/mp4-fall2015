@@ -8,8 +8,10 @@ public abstract class InfectableArenaAnimal extends AbstractArenaAnimal {
 	private int virusLifeSpan;
 
 	/**
+	 * Method to infect this animal with the given arena virus
 	 * 
-	 * @param virusName
+	 * @param virus
+	 *            the virus to infect the animal with
 	 */
 	public void infectAnimal(ArenaVirus virus) {
 		this.virusStatus = virus.getName();
@@ -17,17 +19,31 @@ public abstract class InfectableArenaAnimal extends AbstractArenaAnimal {
 	}
 
 	/**
+	 * Method to return the name of the virus this animal is infected with
 	 * 
-	 * @return String virus name
+	 * @return virusName the name of the virus
 	 */
 	public String getVirus() {
 		return virusStatus;
 	}
 
+	/**
+	 * Method to return the remaining lifespan of the virus the animal is
+	 * infected with.
+	 * 
+	 * If the lifespan is 0, the animal should be healed/not have a virus
+	 * 
+	 * @return viruslifespan the remaining lifespan of the virus
+	 */
 	public int getVirusLifeSpan() {
 		return virusLifeSpan;
 	}
 
+	/**
+	 * Method to decrease the virus lifespan of this animal by 1. If the virus
+	 * lifespan is less than 0, this method heals the animal and removes the
+	 * virus.
+	 */
 	public void decreaseVirusLifeSpan() {
 		virusLifeSpan--;
 
@@ -36,14 +52,23 @@ public abstract class InfectableArenaAnimal extends AbstractArenaAnimal {
 		}
 	}
 
-	public boolean isInfected() {
-		return !"".equals(virusStatus);
-	}
-
+	/**
+	 * Method to heal this animal of any virus. The method should change any
+	 * altered stats back to their initial numbers.
+	 */
 	public void healVirus() {
 		this.virusStatus = "";
 		this.virusLifeSpan = 0;
 		this.setVIEW_RANGE(this.getInitialViewRange());
+	}
+
+	/**
+	 * Method to check whether this animal is infected with a virus.
+	 * 
+	 * @return true if the animal is infected, false otherwise
+	 */
+	public boolean isInfected() {
+		return !"".equals(virusStatus);
 	}
 
 	@Override

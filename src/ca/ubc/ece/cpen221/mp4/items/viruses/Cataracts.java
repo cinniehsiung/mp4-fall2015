@@ -12,9 +12,6 @@ public class Cataracts extends AbstractArenaVirus {
 	private static final ImageIcon IMAGE = Util.loadImage("cataracts.gif");
 	private static final String VIRUS_NAME = "Cataracts";
 
-	private Location location;
-	private int energy = 1;
-
 	/**
 	 * Create a new BlackPlague at <code>initialLocation</code>. The
 	 * <code>initialLocation</code> must be valid and empty.

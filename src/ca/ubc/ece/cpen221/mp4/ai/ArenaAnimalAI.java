@@ -1,6 +1,5 @@
 package ca.ubc.ece.cpen221.mp4.ai;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -8,8 +7,6 @@ import ca.ubc.ece.cpen221.mp4.ArenaWorld;
 import ca.ubc.ece.cpen221.mp4.Direction;
 import ca.ubc.ece.cpen221.mp4.Location;
 import ca.ubc.ece.cpen221.mp4.Util;
-import ca.ubc.ece.cpen221.mp4.World;
-import ca.ubc.ece.cpen221.mp4.commands.BreedCommand;
 import ca.ubc.ece.cpen221.mp4.commands.Command;
 import ca.ubc.ece.cpen221.mp4.commands.EatCommand;
 import ca.ubc.ece.cpen221.mp4.commands.MoveCommand;
@@ -27,8 +24,11 @@ public class ArenaAnimalAI implements AI {
 	 * returns true if the location is empty
 	 * 
 	 * @param world
+	 *            the world with the location
 	 * @param animal
+	 *            the animal
 	 * @param location
+	 *            the location to check if empty
 	 * @return true if the location is empty, false otherwise
 	 */
 	public boolean isLocationEmpty(ArenaWorld world, ArenaAnimal animal, Location location) {

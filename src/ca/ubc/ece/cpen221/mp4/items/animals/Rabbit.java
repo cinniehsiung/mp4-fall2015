@@ -17,6 +17,7 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
  */
 public class Rabbit implements ArenaAnimal {
 
+	// initial stats
 	private static final int INITIAL_ENERGY = 40;
 	private static final int MAX_ENERGY = 60;
 	private static final int STRENGTH = 60;
@@ -26,7 +27,6 @@ public class Rabbit implements ArenaAnimal {
 	private static final ImageIcon rabbitImage = Util.loadImage("rabbit.gif");
 
 	private final AI ai;
-
 	private Location location;
 	private int energy;
 

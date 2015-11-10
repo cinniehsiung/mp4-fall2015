@@ -21,16 +21,17 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
  * {@link ArenaAnimal}s
  */
 public class SabreToothTiger extends InfectableArenaAnimal {
-    private final int INITIAL_ENERGY = 180;
-    private final int MAX_ENERGY = 200;
-    private final int STRENGTH = 150;
-    private final int VIEW_RANGE = 2;
-    private final int MIN_BREEDING_ENERGY = 150;
-    private final int COOLDOWN = 2;
-    
+
+	// initial stats
+	private final int INITIAL_ENERGY = 180;
+	private final int MAX_ENERGY = 200;
+	private final int STRENGTH = 150;
+	private final int VIEW_RANGE = 2;
+	private final int MIN_BREEDING_ENERGY = 150;
+	private final int COOLDOWN = 2;
+
 	private final AI ai;
-	private static final ImageIcon STTImage = Util.loadImage("sabretoothtiger.gif"); // TO
-																			// CHANGE
+	private static final ImageIcon STTImage = Util.loadImage("sabretoothtiger.gif");
 
 	/**
 	 * Create a new SabreToothTiger at <code>initialLocation</code>. The
@@ -71,7 +72,7 @@ public class SabreToothTiger extends InfectableArenaAnimal {
 	public ImageIcon getImage() {
 		return STTImage;
 	}
-	
+
 	@Override
 	public Command getNextAction(World world) {
 		Command nextAction = ai.getNextAction(world, this);

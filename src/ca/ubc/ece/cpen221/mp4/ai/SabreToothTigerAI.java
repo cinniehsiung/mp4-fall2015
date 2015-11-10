@@ -14,10 +14,13 @@ import ca.ubc.ece.cpen221.mp4.items.Item;
 import ca.ubc.ece.cpen221.mp4.items.animals.ArenaAnimal;
 import ca.ubc.ece.cpen221.mp4.items.animals.InfectableArenaAnimal;
 
+/**
+ * Our sabertooth tiger AI.
+ */
 public class SabreToothTigerAI extends InfectableArenaAnimalAI {
 
 	public SabreToothTigerAI() {
-		// TODO Auto-generated constructor stub
+		// empty constructor
 	}
 
 	@Override

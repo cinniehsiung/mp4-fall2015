@@ -37,21 +37,24 @@ public class FoxAI extends AbstractAI {
 		final int VIEW_RANGE = animal.getViewRange();
 		final int BREEDING_ENERGY = MAX_ENERGY - 20;
 
+		// look around fox's surroundings
 		int proximity;
-
 		Set<Item> surroundingItems = new TreeSet<Item>();
 		surroundingItems = world.searchSurroundings(animal);
 
+		// check things closest to fox first
 		for (proximity = 1; proximity <= VIEW_RANGE; proximity++) {
 			for (Item currentItem : surroundingItems) {
 				if (currentItem.getLocation().getDistance(CURRENT_LOCATION) == proximity) {
 					// if item is a rabbit 
 					if (currentItem.getName().equals("Rabbit")) {
 						if (proximity == 1) {
+							// eat rabbit if next to the rabbit
 							if (currentItem.getStrength() < STRENGTH) {
 								return new EatCommand(animal, currentItem);
 							}
 						} else {
+							//otherwise go towards the rabbit
 							Direction toRabbit = Util.getDirectionTowards(CURRENT_LOCATION, currentItem.getLocation());
 							Location gotoRabbit = new Location(CURRENT_LOCATION, toRabbit);
 							if (Util.isLocationEmpty((World) world, gotoRabbit)) {
@@ -60,6 +63,7 @@ public class FoxAI extends AbstractAI {
 						}
 					}
 
+					// if item is fox, spread out, don't compete for food
 					if ((currentItem.getName().equals("Fox") || currentItem.getName().equals("grass")) && proximity < 2) {
 						Direction awayfromFox = Util.getDirectionTowards(currentItem.getLocation(), CURRENT_LOCATION);
 						Location ownTurf = new Location(CURRENT_LOCATION, oppositeDir(awayfromFox));
@@ -70,12 +74,16 @@ public class FoxAI extends AbstractAI {
 				}
 			}
 		}
-
+		
+		// if nothing is around the fox,
 		Location randomAdjLoc = Util.getRandomEmptyAdjacentLocation((World) world, CURRENT_LOCATION);
+		
+		// breed if enough energy
 		if (ENERGY > BREEDING_ENERGY && randomAdjLoc != null) {
 			return new BreedCommand(animal, randomAdjLoc);
 		}
 
+		//otherwise move systematically around clockwise
 		Command move = moveFromEdge(CURRENT_LOCATION.getX(), CURRENT_LOCATION.getY(), world, animal, CURRENT_LOCATION);
 		return move;
 		

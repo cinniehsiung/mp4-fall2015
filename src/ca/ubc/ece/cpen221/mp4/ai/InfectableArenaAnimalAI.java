@@ -16,9 +16,19 @@ public abstract class InfectableArenaAnimalAI extends ArenaAnimalAI {
 	@Override
 	public abstract Command getNextAction(ArenaWorld world, ArenaAnimal animal);
 
+	/**
+	 * Applies virus actions to the infected animal.
+	 * 
+	 * @param world
+	 *            the current world
+	 * @param animal
+	 *            the infected animal to apply the virus actions to
+	 */
 	public void doInfectedActions(ArenaWorld world, InfectableArenaAnimal animal) {
+		// get what virus the animal is infected with
 		String virusStatus = animal.getVirus();
 
+		// do appropriate actions
 		if ("BlackPlague".equals(virusStatus)) {
 			animal.loseEnergy(BLACK_PLAGUE_DAMAGE);
 		}
@@ -31,6 +41,8 @@ public abstract class InfectableArenaAnimalAI extends ArenaAnimalAI {
 			animal.setEnergy(animal.getMaxEnergy());
 		}
 
+		// decrease the virus life span / heal the animal if the virus life span
+		// is 0
 		animal.decreaseVirusLifeSpan();
 	}
 }

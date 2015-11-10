@@ -21,9 +21,9 @@ import ca.ubc.ece.cpen221.mp4.items.LivingItem;
  * capable of damaging smaller animals (such as {@link Fox}s {@link Rabbit}s
  * {@link Gnat}s and {@link Penguin}s)
  */
-
 public class Moose extends InfectableArenaAnimal {
 
+	// initial stats
 	private final int INITIAL_ENERGY = 150;
 	private final int MAX_ENERGY = 200;
 	private final int STRENGTH = 180;
