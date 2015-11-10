@@ -11,11 +11,8 @@ import ca.ubc.ece.cpen221.mp4.commands.Command;
 import ca.ubc.ece.cpen221.mp4.items.LivingItem;
 import ca.ubc.ece.cpen221.mp4.items.viruses.ArenaVirus;
 
-public abstract class AbstractArenaAnimal implements ArenaAnimal { // abstract
-																	// class for
-																	// other
-																	// arena
-																	// animals
+public abstract class AbstractArenaAnimal implements ArenaAnimal {
+	// abstract class for other arena animals
 	private int INITIAL_ENERGY;
 	private int MAX_ENERGY;
 	private int STRENGTH;
@@ -24,8 +21,6 @@ public abstract class AbstractArenaAnimal implements ArenaAnimal { // abstract
 	private int COOLDOWN;
 	private ImageIcon image;
 	private boolean isDead;
-
-	private AI ai;
 
 	private Location location;
 	private int energy = INITIAL_ENERGY;
@@ -37,8 +32,7 @@ public abstract class AbstractArenaAnimal implements ArenaAnimal { // abstract
 	public void eat(Food food) {
 		energy = Math.min(MAX_ENERGY, energy + food.getMeatCalories());
 	}
-	
-	
+
 	protected void setINITIAL_ENERGY(int i) {
 		this.INITIAL_ENERGY = i;
 	}
@@ -50,7 +44,6 @@ public abstract class AbstractArenaAnimal implements ArenaAnimal { // abstract
 	protected void setMAX_ENERGY(int i) {
 		this.MAX_ENERGY = i;
 	}
-	
 
 	protected void setSTRENGTH(int i) {
 		this.STRENGTH = i;
@@ -116,11 +109,7 @@ public abstract class AbstractArenaAnimal implements ArenaAnimal { // abstract
 	public abstract String getName();
 
 	@Override
-	public Command getNextAction(World world) {
-		Command nextAction = ai.getNextAction(world, this);
-		this.energy--; // Loses 1 energy regardless of action.
-		return nextAction;
-	}
+	public abstract Command getNextAction(World world);
 
 	@Override
 	public int getPlantCalories() { // arena animals don't eat plants
@@ -141,7 +130,7 @@ public abstract class AbstractArenaAnimal implements ArenaAnimal { // abstract
 	public boolean isDead() {
 		return this.energy <= 0;
 	}
-	
+
 	@Override
 	public void loseEnergy(int energyLoss) {
 		this.energy = this.energy - energyLoss;
